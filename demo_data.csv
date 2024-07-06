@@ -1,0 +1,8 @@
+metric,value
+total_sales_monthly,15000
+inventory_apples,120
+inventory_milk,50
+upcoming_promotion_1,Discount on Bread,2024-07-10,2024-07-15
+upcoming_promotion_2,Buy 1 Get 1 Free on Eggs,2024-07-20,2024-07-25
+employee_present,25
+employee_absent,5
