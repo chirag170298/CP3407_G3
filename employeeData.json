@@ -1,0 +1,32 @@
+{
+    "employees": [
+      {
+        "name": "Alice Johnson",
+        "sales": 120,
+        "feedback": 4.5,
+        "tasksCompleted": 35,
+        "attendance": 95,
+        "efficiency": 90,
+        "trainingCompleted": true
+      },
+      {
+        "name": "Bob Smith",
+        "sales": 150,
+        "feedback": 4.7,
+        "tasksCompleted": 40,
+        "attendance": 97,
+        "efficiency": 92,
+        "trainingCompleted": false
+      },
+      {
+        "name": "Carol White",
+        "sales": 100,
+        "feedback": 4.3,
+        "tasksCompleted": 30,
+        "attendance": 93,
+        "efficiency": 88,
+        "trainingCompleted": true
+      }
+    ]
+  }
+  
