@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promotions Management</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            max-width: 100%;
+            margin: 0;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            text-align: center;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            padding: 10px 20px;
+            background-color: #f2f2f2;
+            cursor: pointer;
+            margin-right: 10px;
+            border-radius: 4px 4px 0 0;
+        }
+
+        .tab.active {
+            background-color: #e2e2e2;
+        }
+
+        .tab-content {
+            display: none;
+            flex-grow: 1;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .form-section, .promotion-list-section {
+            margin-bottom: 20px;
+        }
+
+        .form-section label, .form-section input, .form-section textarea, .form-section button, .form-section select {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .form-section input, .form-section textarea, .form-section select {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .form-section button {
+            padding: 10px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .form-section button:hover {
+            background-color: #218838;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .delete-button {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .delete-button:hover {
+            background-color: #c82333;
+        }
+
+        .promo-image {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Promotions Management</h1>
+        <div class="tabs">
+            <div class="tab active" data-tab="current">Current Running</div>
+            <div class="tab" data-tab="create">Create Promotion</div>
+            <div class="tab" data-tab="delete">Delete Promotion</div>
+        </div>
+        <div id="current" class="tab-content active">
+            <div class="promotion-list-section">
+                <h2>Current Promotions</h2>
+                <table id="promotion-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Image</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Promotion data will be injected here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div id="create" class="tab-content">
+            <div class="form-section">
+                <h2>Create a Promotion</h2>
+                <label for="promo-name">Promotion Name:</label>
+                <input type="text" id="promo-name" name="promo-name">
+
+                <label for="promo-description">Description:</label>
+                <textarea id="promo-description" name="promo-description" rows="4"></textarea>
+
+                <label for="promo-start-date">Start Date:</label>
+                <input type="date" id="promo-start-date" name="promo-start-date">
+
+                <label for="promo-end-date">End Date:</label>
+                <input type="date" id="promo-end-date" name="promo-end-date">
+
+                <label for="promo-image">Promotion Image:</label>
+                <input type="file" id="promo-image" name="promo-image" accept="image/*">
+
+                <button id="create-promotion">Create Promotion</button>
+            </div>
+        </div>
+        <div id="delete" class="tab-content">
+            <div class="form-section">
+                <h2>Delete a Promotion</h2>
+                <label for="promo-id">Promotion ID:</label>
+                <input type="number" id="promo-id" name="promo-id" min="1">
+
+                <button id="delete-promotion">Delete Promotion</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    showTab(tabId);
+                });
+            });
+
+            // Load current promotions initially
+            loadCurrentPromotions();
+
+            // Event listeners for create and delete promotions
+            document.getElementById('create-promotion').addEventListener('click', createPromotion);
+            document.getElementById('delete-promotion').addEventListener('click', deletePromotion);
+        });
+
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+
+            document.getElementById(tabId).classList.add('active');
+
+            document.querySelectorAll('.tab').forEach(tab => {
+                if (tab.getAttribute('data-tab') === tabId) {
+                    tab.classList.add('active');
+                } else {
+                    tab.classList.remove('active');
+                }
+            });
+
+            if (tabId === 'current') {
+                loadCurrentPromotions();
+            }
+        }
+
+        function loadCurrentPromotions() {
+            fetch('/api/promotions')
+                .then(response => response.json())
+                .then(data => displayPromotions(data))
+                .catch(error => console.error('Error loading promotions:', error));
+        }
+
+        function displayPromotions(promotions) {
+            const tbody = document.querySelector('#promotion-table tbody');
+            tbody.innerHTML = '';
+
+            promotions.forEach(promo => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${promo.name}</td>
+                    <td>${promo.description}</td>
+                    <td>${promo.startDate}</td>
+                    <td>${promo.endDate}</td>
+                    <td><img src="${promo.imageURL}" alt="Promotion Image" class="promo-image"></td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        function createPromotion() {
+            const name = document.getElementById('promo-name').value;
+            const description = document.getElementById('promo-description').value;
+            const startDate = document.getElementById('promo-start-date').value;
+            const endDate = document.getElementById('promo-end-date').value;
+            const imageFile = document.getElementById('promo-image').files[0];
+
+            if (!name || !description || !startDate || !endDate || !imageFile) {
+                alert('Please fill in all fields and select an image.');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('name', name);
+            formData.append('description', description);
+            formData.append('startDate', startDate);
+            formData.append('endDate', endDate);
+            formData.append('image', imageFile);
+
+            fetch('/api/promotions', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Promotion created successfully!');
+                    loadCurrentPromotions();
+                } else {
+                    alert('Failed to create promotion.');
+                }
+            })
+            .catch(error => console.error('Error creating promotion:', error));
+        }
+
+        function deletePromotion() {
+            const promoId = document.getElementById('promo-id').value;
+
+            if (!promoId) {
+                alert('Please enter a promotion ID to delete.');
+                return;
+            }
+
+            fetch(`/api/promotions/${promoId}`, {
+                method: 'DELETE'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Promotion deleted successfully!');
+                    loadCurrentPromotions();
+                } else {
+                    alert('Failed to delete promotion.');
+                }
+            })
+            .catch(error => console.error('Error deleting promotion:', error));
+        }
+    </script>
+</body>
+</html>

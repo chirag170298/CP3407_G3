@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Report</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            max-width: 100%;
+            margin: 0;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            text-align: center;
+        }
+
+        .filter-section {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+
+        .filter-section label {
+            margin-right: 10px;
+        }
+
+        .report-section {
+            flex-grow: 1;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sales Report</h1>
+        <div class="filter-section">
+            <label for="start-date">Start Date:</label>
+            <input type="date" id="start-date" name="start-date">
+
+            <label for="end-date">End Date:</label>
+            <input type="date" id="end-date" name="end-date">
+
+            <button id="generate-report">Generate Report</button>
+        </div>
+        <div class="report-section">
+            <h2>Report</h2>
+            <table id="report-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Total Sales</th>
+                        <th>Number of Transactions</th>
+                        <th>Average Sale Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Report data will be injected here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        document.getElementById('generate-report').addEventListener('click', generateReport);
+
+        function generateReport() {
+            const startDate = document.getElementById('start-date').value;
+            const endDate = document.getElementById('end-date').value;
+
+            if (!startDate || !endDate) {
+                alert('Please select both start and end dates.');
+                return;
+            }
+
+            fetch(`/api/sales-report?start=${startDate}&end=${endDate}`)
+                .then(response => response.json())
+                .then(data => displayReport(data))
+                .catch(error => console.error('Error fetching report data:', error));
+        }
+
+        function displayReport(data) {
+            const tbody = document.querySelector('#report-table tbody');
+            tbody.innerHTML = '';
+
+            data.forEach(record => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${record.date}</td>
+                    <td>${record.totalSales.toFixed(2)}</td>
+                    <td>${record.transactions}</td>
+                    <td>${(record.totalSales / record.transactions).toFixed(2)}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+    </script>
+</body>
+</html>
