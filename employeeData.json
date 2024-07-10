@@ -1,32 +1,60 @@
 {
-    "employees": [
-      {
-        "name": "Alice Johnson",
-        "sales": 120,
-        "feedback": 4.5,
-        "tasksCompleted": 35,
-        "attendance": 95,
-        "efficiency": 90,
-        "trainingCompleted": true
-      },
-      {
-        "name": "Bob Smith",
-        "sales": 150,
-        "feedback": 4.7,
-        "tasksCompleted": 40,
-        "attendance": 97,
-        "efficiency": 92,
-        "trainingCompleted": false
-      },
-      {
-        "name": "Carol White",
-        "sales": 100,
-        "feedback": 4.3,
-        "tasksCompleted": 30,
-        "attendance": 93,
-        "efficiency": 88,
-        "trainingCompleted": true
-      }
-    ]
-  }
-  
+  "employees": [
+    {
+      "id": 1,
+      "name": "Alice Johnson",
+      "sales": 120,
+      "feedback": 4.5,
+      "tasksCompleted": 35,
+      "attendance": 95,
+      "efficiency": 90,
+      "trainingCompleted": true,
+      "schedule": [
+        {
+          "date": "2024-07-09",
+          "shift": "evening"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Bob Smith",
+      "sales": 150,
+      "feedback": 4.7,
+      "tasksCompleted": 40,
+      "attendance": 97,
+      "efficiency": 92,
+      "trainingCompleted": false,
+      "schedule": [
+        {
+          "date": "2024-07-08",
+          "shift": "evening"
+        },
+        {
+          "date": "2024-07-10",
+          "shift": "morning"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Carol White",
+      "sales": 100,
+      "feedback": 4.3,
+      "tasksCompleted": 30,
+      "attendance": 93,
+      "efficiency": 88,
+      "trainingCompleted": true,
+      "schedule": [
+        {
+          "date": "2024-07-11",
+          "shift": "morning"
+        },
+        {
+          "date": "2024-07-12",
+          "shift": "evening"
+        }
+      ]
+    }
+  ]
+}
