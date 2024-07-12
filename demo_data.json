@@ -1,0 +1,9 @@
+{
+    "total_sales_monthly": 25000,
+    "inventory_apples": 500,
+    "inventory_milk": 200,
+    "upcoming_promotion_1": "Buy 1 Get 1 Free on Apples",
+    "upcoming_promotion_2": "20% Off on Dairy Products",
+    "employee_present": 15,
+    "employee_absent": 3
+}
