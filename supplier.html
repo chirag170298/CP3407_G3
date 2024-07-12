@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supplier Contact and Order History</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+    
+
+        /* Navigation Bar Styles */
+        header {
+            background: #c00f29;
+            padding: 70px 0;
+            border-bottom: #ea7b5d 3px solid;
+        }
+        header a, header .highlight, header .current a {
+            color: #ffffff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 16px;
+        }
+        header ul {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            overflow: hidden;
+        }
+        header li {
+            float: left;
+            padding:  20px;
+        }
+        header #branding {
+            float: left;
+            display: flex;
+            align-items: center;
+        }
+        header #branding img {
+            width: 50px; /* Adjusted for better alignment */
+            margin-right: 15px;
+        }
+        header nav {
+            float: right;
+            margin-top: 5px;
+        }
+        header a:hover, header .highlight, header .current a {
+            font-weight: bold;
+        }
+
+        /* Search Container Styles */
+        .search-container {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .search-container input[type="text"] {
+            padding: 10px;
+            margin-right: 10px;
+            width: 300px; /* Fixed width for better alignment */
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .search-container button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .search-container button:hover {
+            background-color: #45a049;
+        }
+
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div id="branding">
+                <img src="allin1.png" alt="ALLIN1 Australia Logo">
+                <h1><span class="highlight">ALLIN1</span> Australia</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li class="current"><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#login">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="search-container">
+            <label for="supplierSearch">Search Supplier:</label>
+            <input type="text" id="supplierSearch" name="supplierSearch">
+            <button onclick="searchSupplier()">Search</button>
+        </div>
+        <h2>Order History</h2>
+        <table id="orderHistory">
+            <tr>
+                <th>Order ID</th>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Status</th>
+            </tr>
+            <!-- Order history rows will go here -->
+        </table>
+    </div>
+
+    <script>
+        function searchSupplier() {
+            var input = document.getElementById('supplierSearch').value;
+            if(input.trim() === '') {
+                alert('Please enter a supplier name or ID to search.');
+                return;
+            }
+            alert('Searching for: ' + input);
+            // Implement the AJAX call to your server here
+        }
+
+        // Example function to add orders to the table
+        function addOrderToHistory(orderId, date, amount, status) {
+            var table = document.getElementById('orderHistory');
+            var row = table.insertRow();
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            var cell4 = row.insertCell(3);
+            cell1.innerHTML = orderId;
+            cell2.innerHTML = date;
+            cell3.innerHTML = amount;
+            cell4.innerHTML = status;
+        }
+
+        // Example orders (replace with actual data retrieval from your server)
+        addOrderToHistory('123', '2024-06-14', '$150.00', 'Shipped');
+        addOrderToHistory('124', '2024-06-15', '$200.00', 'Processing');
+    </script>
+</body>
+</html>
+
+

@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Employee Learning Portal</title>
-    <style>
-        /* General Styles */
-        body {
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Employee Resources</title>
+
+<style>
+     /* General Styles */
+     body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
             margin: 0;
@@ -17,6 +18,21 @@
             margin: auto;
             overflow: hidden;
         }
+        /* Add this CSS to your existing stylesheet */
+/* Add this CSS to your existing stylesheet */
+nav ul li a {
+    color: #d74f6d; /* Example color */
+    text-decoration: none;
+    font-size: 1.5em; /* Larger font size */
+}
+
+nav ul li img {
+    width: 24px; /* Example image width */
+    height: 24px; /* Example image height */
+    margin-right: 8px; /* Space between image and text */
+}
+
+
 
         /* Header Styles */
         header {
@@ -56,75 +72,15 @@
             font-weight: bold;
         }
 
-        /* Video Styles */
-        video {
-            display: block;
-            max-width: 100%;
-            max-height: 80vh;
-            margin: 20px auto;
-        }
-
-        /* Quiz Styles */
-        .quiz-container {
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            max-width: 500px;
-            margin: 40px auto;
-        }
-        .question {
-            font-size: 20px;
-            margin-bottom: 20px;
-        }
-        .options {
-            list-style-type: none;
-            padding: 0;
-        }
-        .options li {
-            margin-bottom: 10px;
-            cursor: pointer;
-            padding: 10px;
-            background-color: #e4e4e4;
-            border-radius: 5px;
-        }
-        .options li:hover {
-            background-color: #d4d4d4;
-        }
-        button {
-            background-color: #ec1018;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            padding: 10px 20px;
-            cursor: pointer;
-            display: block;
-            width: 100%;
-            margin-top: 20px;
-        }
-        button:hover {
-            opacity: 0.8;
-        }
-
-        /* Progress Bar Styles */
-        .progress-container {
-            width: 100%;
-            background-color: #ddd;
-            border-radius: 15px;
-            margin: 20px 0;
-        }     
-        .progress-bar {
-            width: 0;
-            height: 30px;
-            background-color: #4CAF50;
-            text-align: center;
-            line-height: 30px;
-            color: white;
-            border-radius: 15px;
-            transition: width 0.4s ease-in-out;
-        }
-    </style>
+  body { font-family: 'Arial', sans-serif; }
+  .container { width: 80%; margin: auto; padding: 20px; }
+  header { background-color: #c00f29; padding: 20px; text-align: center; }
+  section { margin-bottom: 20px; padding: 15px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+  footer { background-color: #f8f9fa; padding: 10px; text-align: center; }
+  .card { background-color: #d24040; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin-bottom: 20px; padding: 15px; }
+</style>
 </head>
+
 <body>
     <header>
         <div class="container">
@@ -141,84 +97,65 @@
             </nav>
         </div>
     </header>
+<body>
 
-    <video controls>
-        <source src="Untitled design.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
+    <div class="container">
+        <header>
+          <h1>Welcome to the Employee Portal</h1>
+          <p>Access all your benefits and resources here.</p>
+          
+          <nav id="menu" class="hidden">
+  <ul>
+    <li><img src="logo.png" alt="Company Logo"> <a href="#benefits">Benefits</a></li>
+    <li><img src="logo.png" alt="Company Logo"> <a href="#shopping">Shopping</a></li>
+    <li><img src="logo.png" alt="Company Logo"> <a href="#support">Support</a></li>
+    <li><img src="logo.png" alt="Company Logo"> <a href="learning.html">Learning Resources</a></li>
+  </ul>
+</nav>
 
-    <div class="quiz-container" id="quiz">
-        <div class="question" id="question">Question text goes here...</div>
-        <ul class="options" id="options"></ul>
-        <button id="submit">Submit Answer</button>
-    </div>
-    <div class="progress-container">
-        <div id="progress-bar" class="progress-bar"></div>
-    </div>
+        </header>
+      </div>
+      
 
-    <script>
-        const quizQuestions = [
-    {
-        question: "What's the most popular fruit sold in our supermarket?",
-        options: ["Apples", "Bananas", "Oranges", "Grapes"],
-        answer: "Bananas"
-    },
-    {
-        question: "Which aisle has the cleaning supplies?",
-        options: ["Aisle 1", "Aisle 3", "Aisle 5", "Aisle 7"],
-        answer: "Aisle 5"
-    },
-    // Add more questions as needed
-];
+  <!-- Benefits Section -->
+  <section id="benefits" class="card">
+    <h2>Benefits</h2>
+    <p>Information on employee discounts, gift cards, and healthcare options.</p>
+    <!-- More content here -->
+  </section>
 
-let currentQuestionIndex = 0;
-let correctAnswers = 0; // Added a variable to keep track of correct answers
-const questionElement = document.getElementById('question');
-const optionsElement = document.getElementById('options');
-const submitButton = document.getElementById('submit');
-const progressBar = document.getElementById('progress-bar'); // Added reference to the progress bar
+  <!-- Shopping Section -->
+  <section id="shopping" class="card">
+    <h2>Shopping</h2>
+    <p>Exclusive deals and tips for saving money on your purchases.</p>
+    <!-- More content here -->
+  </section>
 
-function showQuestion(questionIndex) {
-    const questionData = quizQuestions[questionIndex];
-    questionElement.textContent = questionData.question;
-    optionsElement.innerHTML = '';
-    questionData.options.forEach(option => {
-        const li = document.createElement('li');
-        li.textContent = option;
-        li.onclick = selectOption;
-        optionsElement.appendChild(li);
-    });
-}
+  <!-- Support Section -->
+  <section id="support" class="card">
+    <h2>Support</h2>
+    <p>Contact HR or find answers to frequently asked questions.</p>
+    <!-- More content here -->
+  </section>
 
-function selectOption(event) {
-    const selectedOption = event.target.textContent;
-    const correctAnswer = quizQuestions[currentQuestionIndex].answer;
-    if (selectedOption === correctAnswer) {
-        alert('Correct!');
-        correctAnswers++; // Increment correct answers count
-        updateProgressBar(); // Update the progress bar
-    } else {
-        alert('Wrong answer. Try again!');
-    }
-    currentQuestionIndex++;
-    if (currentQuestionIndex < quizQuestions.length) {
-        showQuestion(currentQuestionIndex);
-    } else {
-        alert('Quiz completed!');
-        updateProgressBar(); // Final update to the progress bar
-    }
-}
+  <!-- Additional Resources Section -->
+  <section id="additional-resources" class="card">
+    <h2>Additional Resources</h2>
+    <p>Details on the cycle to work scheme and local business offers.</p>
+    <!-- More content here -->
+  </section>
 
-function updateProgressBar() {
-    const totalQuestions = quizQuestions.length;
-    const progressPercentage = (correctAnswers / totalQuestions) * 100;
-    progressBar.style.width = progressPercentage + '%';
-    progressBar.textContent = `Correct Answers: ${correctAnswers} of ${totalQuestions}`;
-}
+  <!-- Footer -->
+  <footer>
+    <p>Contact us at [email protected] or call us at (123)456-7890.</p>
+    <button onclick="toggleMenu()">Menu</button>
+  </footer>
 
-showQuestion(0); // Initialize the first question
+</div>
 
-    </script>
+
+
 </body>
 </html>
+
 
