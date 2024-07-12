@@ -56,7 +56,14 @@
             background-color: #D52B1E;
             color: #fff;
             transition: background-color 0.3s ease;
-            
+            display: flex; /* Ensure it behaves as a flex container */
+            align-items: center; /* Center items vertically */
+        }
+
+        .navbar .login-btn img {
+            margin-right: 10px; /* Adjust spacing between icon and text */
+            width: 20px; /* Adjust icon size as needed */
+            height: auto;
         }
 
         .navbar .login-btn:hover {
@@ -69,22 +76,30 @@
             padding: 20px 0;
             background-color: #fff;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            flex-wrap: wrap; /* Allow services to wrap to the next line */
         }
 
-        .services .service {
+        .service {
             text-align: center;
-            flex: 1;
             padding: 10px;
-            max-width: 100px;
+            max-width: 150px; /* Adjust service box width as needed */
+            text-decoration: none; /* Remove default underline */
+            color: #333; /* Default color for text */
+            transition: transform 0.2s ease; /* Add smooth transition on hover */
         }
 
-        .services .service img {
+        .service:hover {
+            transform: translateY(-5px); /* Lift service box slightly on hover */
+        }
+
+        .service img {
             width: 50px;
             height: 50px;
+            margin-bottom: 10px; /* Adjust spacing between icon and text */
         }
 
-        .services .service p {
-            margin: 10px 0 0;
+        .service p {
+            margin: 0;
             font-size: 14px;
         }
 
@@ -215,42 +230,44 @@
             <a href="#promotions">Promotions</a>
             <a href="#employees">Employees</a>
         </div>
-        <button class="login-btn">Login</button>
+        <button class="login-btn">
+            <img src="icons/user.png" alt="Login Icon"> Login
+        </button>
     </div>
 
     <div class="services">
-        <div class="service">
+        <a href="promotions.html" class="service">
             <img src="icons/promotion.png" alt="Service 1">
             <p>Promotions</p>
-        </div>
-        <div class="service">
+        </a>
+        <a href="inventory.html" class="service">
             <img src="icons/inventory.png" alt="Service 2">
             <p>Inventory</p>
-        </div>
-        <div class="service">
+        </a>
+        <a href="employees.html" class="service">
             <img src="icons/businessman.png" alt="Service 3">
             <p>Employees</p>
-        </div>
-        <div class="service">
+        </a>
+        <a href="management.html" class="service">
             <img src="icons/management.png" alt="Service 4">
             <p>Management</p>
-        </div>
-        <div class="service">
+        </a>
+        <a href="learning.html" class="service">
             <img src="icons/campaign.png" alt="Service 5">
             <p>Learning</p>
-        </div>
-        <div class="service">
+        </a>
+        <a href="sales-report.html" class="service">
             <img src="icons/statistics.png" alt="Service 6">
             <p>Sales Report</p>
-        </div>
-        <div class="service">
+        </a>
+        <a href="customer-feedback.html" class="service">
             <img src="icons/rate.png" alt="Service 7">
             <p>Customer Feedback</p>
-        </div>
-        <div class="service">
+        </a>
+        <a href="store-schedule.html" class="service">
             <img src="icons/schedule.png" alt="Service 8">
             <p>Store Schedule</p>
-        </div>
+        </a>
     </div>
 
     <div class="clock-section">
@@ -288,7 +305,6 @@
             </div>
         </div>
 
-        <h2>Quick Actions</h2>
         <div class="quick-actions">
             <button onclick="addNewProduct()">Add New Product</button>
             <button onclick="createPromotion()">Create Promotion</button>

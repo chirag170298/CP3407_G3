@@ -144,7 +144,7 @@
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="promotion-table-body">
                         <!-- Promotion data will be injected here -->
                     </tbody>
                 </table>
@@ -219,14 +219,14 @@
         }
 
         function loadCurrentPromotions() {
-            fetch('/Users/mukshit/Desktop/CP3407_G3/promotions.json')
+            fetch('promotions.json')
                 .then(response => response.json())
                 .then(data => displayPromotions(data.promotions))
                 .catch(error => console.error('Error loading promotions:', error));
         }
 
         function displayPromotions(promotions) {
-            const tbody = document.querySelector('#promotion-table tbody');
+            const tbody = document.getElementById('promotion-table-body');
             tbody.innerHTML = '';
 
             promotions.forEach(promo => {
@@ -259,53 +259,62 @@
             reader.onload = function(event) {
                 const imageURL = event.target.result;
 
-                fetch('promotions.json')
-                    .then(response => response.json())
-                    .then(data => {
-                        const promotions = data.promotions || [];
-                        const newPromotion = {
-                            id: promotions.length + 1,
-                            name,
-                            description,
-                            startDate,
-                            endDate,
-                            imageURL
-                        };
+                const newPromotion = {
+                    id: generatePromotionId(), // Generate a unique ID
+                    name,
+                    description,
+                    startDate,
+                    endDate,
+                    imageURL
+                };
 
-                        promotions.push(newPromotion);
-                        savePromotions(promotions);
-                        alert('Promotion created successfully!');
-                        loadCurrentPromotions();
-                    })
-                    .catch(error => console.error('Error fetching promotions:', error));
+                fetch('promotions.json', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ promotion: newPromotion })
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to create promotion.');
+                    }
+                    alert('Promotion created successfully!');
+                    loadCurrentPromotions(); // Reload promotions after creation
+                })
+                .catch(error => console.error('Error creating promotion:', error));
             };
 
             reader.readAsDataURL(imageFile);
         }
 
         function deletePromotion(id) {
-            fetch('/Users/mukshit/Desktop/CP3407_G3/promotions.json')
+            fetch('promotions.json')
                 .then(response => response.json())
                 .then(data => {
                     const promotions = data.promotions || [];
                     const updatedPromotions = promotions.filter(promo => promo.id !== id);
                     savePromotions(updatedPromotions);
                     alert('Promotion deleted successfully!');
-                    loadCurrentPromotions();
+                    loadCurrentPromotions(); // Reload promotions after deletion
                 })
                 .catch(error => console.error('Error fetching promotions:', error));
         }
 
         function savePromotions(promotions) {
-            const data = { promotions };
             fetch('promotions.json', {
                 method: 'PUT', // Use PUT method for local file modification (not standard RESTful API)
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(data)
+                body: JSON.stringify({ promotions })
             })
             .catch(error => console.error('Error saving promotions:', error));
+        }
+
+        // Dummy function to generate unique promotion IDs (replace with appropriate logic)
+        function generatePromotionId() {
+            return Math.floor(Math.random() * 1000) + 1; // Replace with better ID generation logic
         }
     </script>
 </body>

@@ -3,18 +3,19 @@
         {
             "id": 1,
             "name": "Summer Sale",
-            "description": "Get up to 50% off on summer items!",
-            "startDate": "2024-07-01",
-            "endDate": "2024-07-15",
-            "imageURL": "http://localhost:3000/uploads/summer_sale.jpg"
+            "description": "Big discounts on summer items.",
+            "startDate": "2024-07-15",
+            "endDate": "2024-07-31",
+            "imageURL": "path/to/summer-sale.jpg"
         },
         {
             "id": 2,
             "name": "Back to School",
-            "description": "Special discounts on school supplies!",
+            "description": "Special offers for back-to-school essentials.",
             "startDate": "2024-08-01",
             "endDate": "2024-08-15",
-            "imageURL": "http://localhost:3000/uploads/back_to_school.jpg"
+            "imageURL": "path/to/back-to-school.jpg"
         }
+        
     ]
 }
