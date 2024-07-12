@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Performance Stats</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        
+        main {
+            margin: 20px;
+        }
+        
+        .chart-container {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .table-container {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 1em;
+        }
+        
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+        }
+        
+        tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+        
+        .top-employee {
+            background: #e0ffe0;
+            border: 1px solid #4CAF50;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+        
+        .training-completed {
+            color: green;
+        }
+        
+        .training-pending {
+            color: red;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Employee Performance Statistics</h1>
+    
+    <main>
+        <section class="top-employee" id="topEmployeeSection">
+            <h2>Top Employee</h2>
+            <p id="topEmployee"></p>
+        </section>
+        <section class="chart-container">
+            <h2>Overall Performance</h2>
+            <canvas id="salesChart"></canvas>
+        </section>
+        <section class="chart-container">
+            <h2>Feedback Scores</h2>
+            <canvas id="feedbackChart"></canvas>
+        </section>
+        <section class="table-container">
+            <h2>Individual Performance</h2>
+            <table id="performanceTable">
+                <thead>
+                    <tr>
+                        <th>Employee</th>
+                        <th>Sales</th>
+                        <th>Feedback</th>
+                        <th>Tasks Completed</th>
+                        <th>Attendance</th>
+                        <th>Efficiency</th>
+                        <th>Training Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Data rows will be inserted here -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+    <script>
+        // Fetch data from the JSON file
+        fetch('employeeData.json')
+            .then(response => response.json())
+            .then(data => {
+                const employees = data.employees;
+                const tableBody = document.querySelector('#performanceTable tbody');
+                let topEmployee = employees[0];
+                
+                // Populate the table with employee data
+                employees.forEach(employee => {
+                    if (employee.efficiency > topEmployee.efficiency) {
+                        topEmployee = employee;
+                    }
+
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${employee.name}</td>
+                        <td>${employee.sales}</td>
+                        <td>${employee.feedback}</td>
+                        <td>${employee.tasksCompleted}</td>
+                        <td>${employee.attendance}</td>
+                        <td>${employee.efficiency}</td>
+                        <td class="${employee.trainingCompleted ? 'training-completed' : 'training-pending'}">
+                            ${employee.trainingCompleted ? 'Completed' : 'Pending'}
+                        </td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+
+                document.getElementById('topEmployee').innerText = `${topEmployee.name} (Efficiency: ${topEmployee.efficiency}%)`;
+
+                // Create sales chart
+                const salesData = {
+                    labels: employees.map(emp => emp.name),
+                    datasets: [{
+                        label: 'Sales',
+                        data: employees.map(emp => emp.sales),
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                };
+
+                const salesConfig = {
+                    type: 'bar',
+                    data: salesData,
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                };
+
+                const salesChart = new Chart(
+                    document.getElementById('salesChart'),
+                    salesConfig
+                );
+
+                // Create feedback chart
+                const feedbackData = {
+                    labels: employees.map(emp => emp.name),
+                    datasets: [{
+                        label: 'Feedback',
+                        data: employees.map(emp => emp.feedback),
+                        backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                        borderColor: 'rgba(255, 159, 64, 1)',
+                        borderWidth: 1
+                    }]
+                };
+
+                const feedbackConfig = {
+                    type: 'bar',
+                    data: feedbackData,
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                };
+
+                const feedbackChart = new Chart(
+                    document.getElementById('feedbackChart'),
+                    feedbackConfig
+                );
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    </script>
+</body>
+</html>
