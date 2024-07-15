@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const fs = require('fs');
 const mysql = require('mysql');
 const cors = require('cors');
+const path = require('path');
 
 const app = express();
 const port = 3002; // Change this to your preferred port if needed
@@ -84,6 +85,36 @@ app.delete('/api/employees/:id/schedule', (req, res) => {
     }
   } else {
     res.status(404).send({ message: 'Employee not found' });
+  }
+});
+
+// Function to read customer feedback data
+const readFeedbackData = () => {
+  const data = fs.readFileSync(path.join(__dirname, 'customerFeedback.json'));
+  return JSON.parse(data);
+};
+
+const writeFeedbackData = (data) => {
+  fs.writeFileSync(path.join(__dirname, 'customerFeedback.json'), JSON.stringify(data, null, 2));
+};
+
+// Get all feedback
+app.get('/api/feedback', (req, res) => {
+  const data = readFeedbackData();
+  res.json(data.feedback);
+});
+
+// Respond to feedback
+app.post('/api/feedback/:id/response', (req, res) => {
+  const data = readFeedbackData();
+  const feedback = data.feedback.find(fb => fb.id === parseInt(req.params.id));
+  if (feedback) {
+    feedback.response = req.body.response;
+    feedback.status = 'Responded';
+    writeFeedbackData(data);
+    res.status(201).send(feedback);
+  } else {
+    res.status(404).send({ message: 'Feedback not found' });
   }
 });
 

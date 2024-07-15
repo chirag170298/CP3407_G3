@@ -1,0 +1,28 @@
+{
+  "feedback": [
+    {
+      "id": 1,
+      "customerName": "John Doe",
+      "feedbackType": "Complaint",
+      "message": "The product I received was damaged.",
+      "status": "Responded",
+      "response": "Our team will get to you. thanks"
+    },
+    {
+      "id": 2,
+      "customerName": "Jane Smith",
+      "feedbackType": "Feedback",
+      "message": "Great service, but the delivery took too long.",
+      "status": "Responded",
+      "response": "Thank you"
+    },
+    {
+      "id": 3,
+      "customerName": "Alice Brown",
+      "feedbackType": "Query",
+      "message": "Can you provide more details about product X?",
+      "status": "Pending",
+      "response": ""
+    }
+  ]
+}
