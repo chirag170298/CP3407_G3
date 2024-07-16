@@ -135,7 +135,7 @@
                 }
             });
         }
-        
+
         function renderStockTable(data) {
             const stockData = data; // Assuming rosterData is an array of objects
             const tableBody = document.querySelector('#inventoryTable tbody');
@@ -193,5 +193,10 @@
                 }
             });
         }
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("DOM fully loaded and parsed.");
+            fetchStock();
+        });
+    </script>
 </body>
 </html>
