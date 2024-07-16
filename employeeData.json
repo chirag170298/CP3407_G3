@@ -11,15 +11,15 @@
       "trainingCompleted": true,
       "schedule": [
         {
-          "date": "2024-07-27",
+          "date": "2024-07-11",
           "shift": "evening"
         },
         {
-          "date": "2024-07-11",
-          "shift": "morning"
+          "date": "2024-07-12",
+          "shift": "evening"
         },
         {
-          "date": "2024-07-11",
+          "date": "2024-07-12",
           "shift": "evening"
         }
       ]

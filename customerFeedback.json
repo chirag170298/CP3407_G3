@@ -21,8 +21,8 @@
       "customerName": "Alice Brown",
       "feedbackType": "Query",
       "message": "Can you provide more details about product X?",
-      "status": "Pending",
-      "response": ""
+      "status": "Responded",
+      "response": "Thank you"
     }
   ]
 }
