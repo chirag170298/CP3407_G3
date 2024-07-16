@@ -135,6 +135,33 @@
                 }
             });
         }
-   
+        function renderStockTable(data) {
+            const stockData = data; // Assuming rosterData is an array of objects
+            const tableBody = document.querySelector('#inventoryTable tbody');
+            tableBody.innerHTML = ''; // Clear existing table rows if any
+
+            stockData.forEach(entry => {
+                const itemName = entry.ITEM_NAME; // Renamed to entryDate
+                const quantity = entry.COUNT_QTY;
+                const price = entry.PRICE;
+                const stockID = entry.STOCK_ID;
+                
+                // Create a new row
+                const row = document.createElement('tr');
+                row.setAttribute('data-stock-id', stockID); // Ensure data attribute is named correctly
+
+
+                // Populate row HTML content
+                row.innerHTML = `
+                    <td>${itemName}</td>
+                    <td>${quantity}</td>
+                    <td>${price}</td>
+                    <td><button class="delete-btn" onclick="deleteEntry('${stockID}')">Delete</button></td>
+                `;
+
+                // Append row to table body
+                tableBody.appendChild(row);
+                    });
+                }
 </body>
 </html>
