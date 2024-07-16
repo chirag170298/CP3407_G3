@@ -11,16 +11,16 @@
       "trainingCompleted": true,
       "schedule": [
         {
+          "date": "2024-07-08",
+          "shift": "morning"
+        },
+        {
+          "date": "2024-07-12",
+          "shift": "afternoon"
+        },
+        {
           "date": "2024-07-11",
-          "shift": "evening"
-        },
-        {
-          "date": "2024-07-12",
-          "shift": "evening"
-        },
-        {
-          "date": "2024-07-12",
-          "shift": "evening"
+          "shift": "afternoon"
         }
       ]
     },
@@ -33,7 +33,12 @@
       "attendance": 97,
       "efficiency": 92,
       "trainingCompleted": false,
-      "schedule": []
+      "schedule": [
+        {
+          "date": "2024-07-08",
+          "shift": "afternoon"
+        }
+      ]
     },
     {
       "id": 3,
@@ -46,8 +51,12 @@
       "trainingCompleted": true,
       "schedule": [
         {
-          "date": "2024-07-17",
-          "shift": "morning"
+          "date": "2024-07-09",
+          "shift": "evening"
+        },
+        {
+          "date": "2024-07-11",
+          "shift": "evening"
         }
       ]
     }
