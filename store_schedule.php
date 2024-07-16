@@ -435,9 +435,17 @@ function renderScheduleTable(data) {
                     }
                 },
                 error: function(xhr, status, error) {
-                    console.error('Error deleting entry:', error);
+                    console.error('Error deleting entry outside php:', error);
                 }
             });
         }
-
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("DOM fully loaded and parsed.");
+            
+            // Define your function
+            
+            
+            // Call your function
+            submitDate();
+        });
     </script>
