@@ -116,7 +116,25 @@
             </tbody>
         </table>
     </div>
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        let inventory = [];
+        function fetchStock() {
+            $.ajax({
+                url: 'fetchStock.php',
+                dataType: 'json', // Expecting JSON response
+                cache: false,
+                success: function(response) {
+                    console.log('PHP Response:', response); 
+                    renderStockTable(response);
+                    response = null;
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);
+                    $('#rosterResults').html('<p>Error fetching data. Please try again.</p>');
+                }
+            });
+        }
    
 </body>
 </html>
