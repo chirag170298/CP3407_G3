@@ -1,37 +1,65 @@
 <?php
 
-// Perform database operations here (replace with your actual database logic)
-// Example connection setup
 $servername = 'cp3407-website-db.cfumcuommiak.ap-southeast-2.rds.amazonaws.com'; // Replace with your RDS endpoint
     $username = 'CP3407admin';
     $password = 'YFtG]?$4&+k}.WJ';
     $dbname = 'EasyGrocer';
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+    $mysqli = new mysqli($servername, $username, $password, $dbname);
+header('Content-Type: application/json');
+$response = array('success' => false);
 
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 if (isset($_POST['RosterID'])) {
-    $rosterID = $_POST['RosterID'];
+    $rosterID = intval($_POST['RosterID']);
 
-    // Example query to delete from your table
-    $stmt = $conn->prepare("DELETE FROM Roster WHERE RosterID = ?");
-    $stmt->bind_param('i', $rosterID); // Assuming RosterID is an integer
+  if ($mysqli->connect_errno) {
+      $response['message'] = 'Failed to connect to MySQL: ' . $mysqli->connect_error;
+  } else {
+      // Begin transaction
+      $mysqli->begin_transaction();
 
-    if ($stmt->execute()) {
-        // Successful deletion
-        http_response_code(200); // Optionally, set a success response code
-        echo json_encode(['success' => true, 'message' => 'Entry deleted successfully']);
-    } else {
-        // Failed to delete
-        http_response_code(500); // Server error
-        echo json_encode(['success' => false, 'message' => 'Failed to delete entry']);
-    }
+      try {
+          // SQL to delete from TIMESHEET
+          $sqlTimesheet = "DELETE FROM TIMESHEET WHERE Roster_RosterID = ?";
+          if ($stmtTimesheet = $mysqli->prepare($sqlTimesheet)) {
+              $stmtTimesheet->bind_param('i', $rosterID);
+
+              if (!$stmtTimesheet->execute()) {
+                  throw new Exception('Failed to execute delete statement for TIMESHEET: ' . $stmtTimesheet->error);
+              }
+              $stmtTimesheet->close();
+          } else {
+              throw new Exception('Failed to prepare statement for TIMESHEET: ' . $mysqli->error);
+          }
+
+          // SQL to delete from Roster
+          $sqlRoster = "DELETE FROM Roster WHERE RosterID = ?";
+          if ($stmtRoster = $mysqli->prepare($sqlRoster)) {
+              $stmtRoster->bind_param('i', $rosterID);
+
+              if (!$stmtRoster->execute()) {
+                  throw new Exception('Failed to execute delete statement for Roster: ' . $stmtRoster->error);
+              }
+              $stmtRoster->close();
+          } else {
+              throw new Exception('Failed to prepare statement for Roster: ' . $mysqli->error);
+          }
+
+          // Commit transaction
+          $mysqli->commit();
+          $response['success'] = true;
+      } catch (Exception $e) {
+          // Rollback transaction
+          $mysqli->rollback();
+          $response['message'] = $e->getMessage();
+      }
+
+      $mysqli->close();
+  }
 } else {
-    // Handle case where RosterID is not set in POST
-    http_response_code(400); // Bad request
-    echo json_encode(['success' => false, 'message' => 'RosterID not provided']);
+  $response['message'] = 'Invalid RosterID';
 }
+
+echo json_encode($response);
 ?>
 
