@@ -12,6 +12,13 @@ if (isset($_POST['date'])) {
     } else {
         $weekStartDate = $selectedDateTime->format('Y-m-d');
     }
+} else {
+    $selectedDate = $currentDate;
+    if ($selectedDateTime->format('N') != 1) { // Check if the selected date is a Monday
+        $weekStartDate = $selectedDateTime->modify('last monday')->format('Y-m-d');
+    } else {
+        $weekStartDate = $selectedDateTime->format('Y-m-d');
+    }
 }
 
 
