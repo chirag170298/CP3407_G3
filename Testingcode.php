@@ -135,6 +135,7 @@
                 }
             });
         }
+        
         function renderStockTable(data) {
             const stockData = data; // Assuming rosterData is an array of objects
             const tableBody = document.querySelector('#inventoryTable tbody');
@@ -162,6 +163,35 @@
                 // Append row to table body
                 tableBody.appendChild(row);
                     });
+        }
+
+        function deleteEntry(stockID) {
+            $.ajax({
+                url: 'removeStock.php',
+                method: 'POST',
+                dataType: 'json',
+                data: { stockID: stockID },
+                success: function(response) {
+                    if (response.success) {
+                        // Assuming successful deletion, remove the row from the table
+                        const tableRow = document.querySelector(`tr[data-stock-id="${stockID}"]`);
+                        console.log(`Selector used: tr[data-stock-id="${stockID}"]`); // Debugging output
+                        console.log('Selected row:', tableRow); // Debugging output
+                        if (tableRow) {
+                            tableRow.remove();
+                            console.log('Entry deleted successfully');
+                            fetchStock();
+                        } else {
+                            console.error('Table row not found');
+                        }
+                    } else {
+                        console.error('Failed to delete entry:', response.message);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error deleting entry outside php:', error);
                 }
+            });
+        }
 </body>
 </html>
