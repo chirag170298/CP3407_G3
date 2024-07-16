@@ -100,7 +100,15 @@
             <input type="number" step="0.01" id="item-price">
         </div>
         <div class="form-group">
-            <button onclick="addItem()">Add Item</button>
+            <label for="item-category">category:</label>
+            <input type="text" id="item-category">
+        </div>
+        <div class="form-group">
+            <label for="item-unit">Unit of Sale:</label>
+            <input type="text" id="item-unit">
+        </div>
+        <div class="form-group">
+            <button onclick="addStock()">Add Item</button>
         </div>
         <table id="inventoryTable">
             <thead>
@@ -116,6 +124,7 @@
             </tbody>
         </table>
     </div>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         let inventory = [];
@@ -163,36 +172,68 @@
                 // Append row to table body
                 tableBody.appendChild(row);
                     });
-        }
-
-        function deleteEntry(stockID) {
-            $.ajax({
-                url: 'removeStock.php',
-                method: 'POST',
-                dataType: 'json',
-                data: { stockID: stockID },
-                success: function(response) {
-                    if (response.success) {
-                        // Assuming successful deletion, remove the row from the table
-                        const tableRow = document.querySelector(`tr[data-stock-id="${stockID}"]`);
-                        console.log(`Selector used: tr[data-stock-id="${stockID}"]`); // Debugging output
-                        console.log('Selected row:', tableRow); // Debugging output
-                        if (tableRow) {
-                            tableRow.remove();
-                            console.log('Entry deleted successfully');
-                            fetchStock();
-                        } else {
-                            console.error('Table row not found');
-                        }
-                    } else {
-                        console.error('Failed to delete entry:', response.message);
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error('Error deleting entry outside php:', error);
                 }
-            });
-        }
+    function addStock() {
+        var formData = new FormData();
+        formData.append('item-name', document.getElementById('item-name').value);
+        formData.append('item-quantity', document.getElementById('item-quantity').value);
+        formData.append('item-price', document.getElementById('item-price').value);
+
+        fetch('addSchedule.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.text();
+        })
+        .then(data => {
+            if (data.trim() === 'Schedule added successfully') {
+                console.log(data); // Log response from PHP script
+                alert('Schedule added successfully!');
+                fetchShifts();
+            } else {
+                console.log(data); // Log response from PHP script
+                alert('Error: ' + data); // Display PHP error message
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('There was an error adding the schedule.');
+        });
+    
+    }           
+
+    function deleteEntry(stockID) {
+        $.ajax({
+            url: 'removeStock.php',
+            method: 'POST',
+            dataType: 'json',
+            data: { stockID: stockID },
+            success: function(response) {
+                if (response.success) {
+                    // Assuming successful deletion, remove the row from the table
+                    const tableRow = document.querySelector(`tr[data-stock-id="${stockID}"]`);
+                    console.log(`Selector used: tr[data-stock-id="${stockID}"]`); // Debugging output
+                    console.log('Selected row:', tableRow); // Debugging output
+                    if (tableRow) {
+                        tableRow.remove();
+                        console.log('Entry deleted successfully');
+                        fetchStock();
+                    } else {
+                        console.error('Table row not found');
+                    }
+                } else {
+                    console.error('Failed to delete entry:', response.message);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Error deleting entry outside php:', error);
+            }
+        });
+    }
         document.addEventListener('DOMContentLoaded', function() {
             console.log("DOM fully loaded and parsed.");
             fetchStock();
