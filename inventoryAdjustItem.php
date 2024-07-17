@@ -120,7 +120,7 @@ if ($conn->connect_error) {
     </div>
     
         <div class="form-group">
-            <button onclick="">Adjust Item</button>
+            <button onclick="adjustItem()">Adjust Item</button>
         </div>
         <div class="form-group">
             <button onclick="fetchStock()">refresh</button>
