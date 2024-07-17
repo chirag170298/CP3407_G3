@@ -13,15 +13,4 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-
-
-$sql = "SELECT DISTINCT category_Type FROM STOCK";
-$result = $conn->query($sql);
-$categories = [];
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $categories[] = $row['category_Type'];
-    }
-} else {
-    echo "0 results";
-}
+?>
