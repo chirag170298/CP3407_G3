@@ -126,9 +126,26 @@ $conn->close();
         .delete-btn:hover {
             background: #e53935;
         }
+        .home-button {
+    position: fixed;
+    top: 10px; /* Adjust to position vertically */
+    left: 10px; /* Adjust to position horizontally */
+    background-color: #007bff; /* Example background color */
+    color: #fff; /* Text color */
+    padding: 10px 20px;
+    text-decoration: none; /* Remove underline */
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.home-button:hover {
+    background-color: #0056b3; /* Darker color on hover */
+}
     </style>
 </head>
 <body>
+<a href="index.php" class="home-button">Home</a>
     <h1>Inventory Manager</h1>
     <h1>Add new Item</h1>
     <div class="container">
@@ -210,36 +227,64 @@ $conn->close();
             });
         }
 
+        function updateStock(stockID) {
+            const itemName = document.querySelector(`#itemName_${stockID}`).value;
+            const quantity = parseFloat(document.querySelector(`#quantity_${stockID}`).value);
+            const price = parseFloat(document.querySelector(`#price_${stockID}`).value);
+            const formData = new FormData();
+            formData.append('stockID', stockID);
+            formData.append('itemName', itemName); // Include itemName in FormData
+            formData.append('quantity', quantity);
+            formData.append('price', price);
+
+            fetch('adjustStock.php', {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => response.text())
+            .then(result => {
+                console.log(result); // Output the result, you can handle this as needed
+                // Optionally, update the UI or show a message based on the result
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+
         function renderStockTable(data) {
-            const stockData = data; // Assuming rosterData is an array of objects
             const tableBody = document.querySelector('#inventoryTable tbody');
             tableBody.innerHTML = ''; // Clear existing table rows if any
 
-            stockData.forEach(entry => {
-                const itemName = entry.ITEM_NAME; // Renamed to entryDate
+            data.forEach(entry => {
+                const itemName = entry.ITEM_NAME;
                 const quantity = entry.COUNT_QTY;
                 const price = entry.PRICE;
                 const stockID = entry.STOCK_ID;
+
+            // Create a new row
+            const row = document.createElement('tr');
+            row.setAttribute('data-stock-id', stockID); // Ensure data attribute is named correctly
+
+            // Populate row HTML content
+            row.innerHTML = `
+                <td><input type="text" id="itemName_${stockID}" value="${itemName}"></td>
+            <td><input type="number" id="quantity_${stockID}" value="${quantity}" step="1"></td>
+            <td><input type="number" id="price_${stockID}" value="${price}" step="0.01"></td>
+            <td>
+                <button class="update-btn" onclick="updateStock(${stockID})">Update</button>
+                <button class="delete-btn" onclick="deleteEntry(${stockID})">Delete</button></td>
                 
-                // Create a new row
-                const row = document.createElement('tr');
-                row.setAttribute('data-stock-id', stockID); // Ensure data attribute is named correctly
+            `;
 
-
-                // Populate row HTML content
-                row.innerHTML = `
-                    <td>${itemName}</td>
-                    <td>${quantity}</td>
-                    <td>${price}</td>
-                    <td><button class="delete-btn" onclick="deleteEntry('${stockID}')">Delete</button></td>
-                `;
-
+            tableBody.appendChild(row);
+    });
+}
+ // <td>${itemName}</td>
+                    // <td>${quantity}</td>
+                    // <td>${price}</td>
+                    // <td><button class="delete-btn" onclick="deleteEntry('${stockID}')">Delete</button></td>
                 // Append row to table body
-                tableBody.appendChild(row);
-                    });
-                }
-
-
     function addNewItem() {
         var formData = new FormData();
         formData.append('itemname', document.getElementById('itemname').value);
