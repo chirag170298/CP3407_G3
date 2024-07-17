@@ -145,6 +145,37 @@ if ($conn->connect_error) {
         </html>
 
         <script>
+            function adjustItem() {
+                var formData = new FormData();
+                formData.append('itemname', document.getElementById('itemname').value);
+                formData.append('itemquantity', document.getElementById('itemquantity').value);
+
+                fetch('adjustStock.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    if (data.trim() === 'Item added successfully') {
+                        console.log(data); // Log response from PHP script
+                        alert('Item added successfully!');
+                        fetchStock();
+                    } else {
+                        console.log(data); // Log response from PHP script
+                        alert('Error because it didn\'t say success: ' + data); // Display PHP error message
+                    }
+                })
+                .catch(error => {
+                    console.error('Caught Error:', error);
+                    alert('There was an error adding the item.');
+                });
+            
+            }   
             function deleteEntry(stockID) {
                 $.ajax({
                     url: 'removeStock.php',
