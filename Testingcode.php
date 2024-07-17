@@ -1,9 +1,53 @@
+
+
+
+<?php
+$servername = 'cp3407-website-db.cfumcuommiak.ap-southeast-2.rds.amazonaws.com'; // Replace with your RDS endpoint
+$username = 'CP3407admin';
+$password = 'YFtG]?$4&+k}.WJ';
+$dbname = 'EasyGrocer';
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+
+$sql = "SELECT DISTINCT category_Type FROM STOCK";
+$result = $conn->query($sql);
+$categories = [];
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $categories[] = $row['category_Type'];
+    }
+} else {
+    echo "0 results";
+}
+
+
+$sql = "SELECT DISTINCT UOS FROM STOCK";
+$result = $conn->query($sql);
+$units_of_sale = [];
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $units_of_sale[] = $row['UOS'];
+    }
+} else {
+    echo "0 results";
+}
+$conn->close();
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventory Manager</title>
+    <title>Add new item</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -86,30 +130,49 @@
 </head>
 <body>
     <h1>Inventory Manager</h1>
+    <h1>Add new Item</h1>
     <div class="container">
+    <div class="form-group">
+        <label for="itemname">Item Name:</label>
+        <input type="text" id="itemname" name="itemname">
+    </div>
+    <div class="form-group">
+        <label for="itemquantity">Quantity:</label>
+        <input type="text" id="itemquantity" name="itemquantity">
+    </div>
+    <div class="form-group">
+        <label for="itemprice">Price:</label>
+        <input type="text" id="itemprice" name="itemprice">
+    </div>
+    <div class="form-group">
+        <label for="itemcategory">Category:</label>
+        <select id="itemcategory" name="itemcategory">
+            <?php
+            // Assuming $categories is an array of category options fetched or defined elsewhere
+            foreach ($categories as $category) {
+                echo '<option value="' . $category . '">' . $category . '</option>';
+            }
+            ?>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="itemunit">Unit of Sale:</label>
+        <select id="itemunit" name="itemunit">
+            <?php
+            // Assuming $units_of_sale is an array of unit of sale options fetched or defined elsewhere
+            foreach ($units_of_sale as $UOS) {
+                echo '<option value="' . $UOS . '">' . $UOS . '</option>';
+            }
+            ?>
+        </select>
+    
         <div class="form-group">
-            <label for="item-name">Item Name:</label>
-            <input type="text" id="item-name">
+            <button onclick="addNewItem()">Add Item</button>
         </div>
         <div class="form-group">
-            <label for="item-quantity">Quantity:</label>
-            <input type="number" id="item-quantity">
+            <button onclick="fetchStock()">refresh</button>
         </div>
-        <div class="form-group">
-            <label for="item-price">Price:</label>
-            <input type="number" step="0.01" id="item-price">
-        </div>
-        <div class="form-group">
-            <label for="item-category">category:</label>
-            <input type="text" id="item-category">
-        </div>
-        <div class="form-group">
-            <label for="item-unit">Unit of Sale:</label>
-            <input type="text" id="item-unit">
-        </div>
-        <div class="form-group">
-            <button onclick="addStock()">Add Item</button>
-        </div>
+
         <table id="inventoryTable">
             <thead>
                 <tr>
@@ -128,7 +191,9 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         let inventory = [];
-        function fetchStock() {
+
+    function fetchStock() {
+            // console.log($categories);
             $.ajax({
                 url: 'fetchStock.php',
                 dataType: 'json', // Expecting JSON response
@@ -173,13 +238,17 @@
                 tableBody.appendChild(row);
                     });
                 }
-    function addStock() {
-        var formData = new FormData();
-        formData.append('item-name', document.getElementById('item-name').value);
-        formData.append('item-quantity', document.getElementById('item-quantity').value);
-        formData.append('item-price', document.getElementById('item-price').value);
 
-        fetch('addSchedule.php', {
+
+    function addNewItem() {
+        var formData = new FormData();
+        formData.append('itemname', document.getElementById('itemname').value);
+        formData.append('itemquantity', document.getElementById('itemquantity').value);
+        formData.append('itemprice', document.getElementById('itemprice').value);
+        formData.append('itemcategory', document.getElementById('itemcategory').value);
+        formData.append('itemunit', document.getElementById('itemunit').value);
+
+        fetch('addStock.php', {
             method: 'POST',
             body: formData
         })
@@ -190,10 +259,10 @@
             return response.text();
         })
         .then(data => {
-            if (data.trim() === 'Schedule added successfully') {
+            if (data.trim() === 'Item added successfully') {
                 console.log(data); // Log response from PHP script
-                alert('Schedule added successfully!');
-                fetchShifts();
+                alert('Item added successfully!');
+                fetchStock();
             } else {
                 console.log(data); // Log response from PHP script
                 alert('Error: ' + data); // Display PHP error message
@@ -201,7 +270,7 @@
         })
         .catch(error => {
             console.error('Error:', error);
-            alert('There was an error adding the schedule.');
+            alert('There was an error adding the item.');
         });
     
     }           
