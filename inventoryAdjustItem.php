@@ -145,6 +145,23 @@ if ($conn->connect_error) {
         </html>
 
         <script>
+            function fetchStock() {
+                // console.log($categories);
+                $.ajax({
+                    url: 'fetchStock.php',
+                    dataType: 'json', // Expecting JSON response
+                    cache: false,
+                    success: function(response) {
+                        console.log('PHP Response:', response); 
+                        renderStockTable(response);
+                        response = null;
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error:', error);
+                        $('#rosterResults').html('<p>Error fetching data. Please try again.</p>');
+                    }
+                });
+            }
             function renderStockTable(data) {
                 const stockData = data; // Assuming rosterData is an array of objects
                 const tableBody = document.querySelector('#inventoryTable tbody');
