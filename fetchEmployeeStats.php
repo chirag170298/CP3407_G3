@@ -41,13 +41,23 @@ $sql = "SELECT p.PersonID, p.FirstName, p.LastName, p.StoreID, p.RoleID, p.users
                      pr.FEEDBACK, pr.TASKS_COMPLETED, pr.ATTENDANCE, pr.EFFICIENCY, pr.TRAINING_COMPLETED";
 
 
-header('Content-Type: application/json');
-echo json_encode($employeeStats);
+
 $result = $conn->query($sql);
 $employeeStats = array();
 
 
+if ($result->num_rows > 0) {
+    // Output data of each row
+    while($row = $result->fetch_assoc()) {
+        $employeeStats[] = $row;
+    }
+} else {
+    $employeeStats = ['error' => 'No results found'];
+}
 
+
+header('Content-Type: application/json');
+echo json_encode($employeeStats);
 $conn->close();
 
 exit;
