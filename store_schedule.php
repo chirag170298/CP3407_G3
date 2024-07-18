@@ -27,8 +27,7 @@ if ($result->num_rows > 0) {
     // Fetch all user IDs and store them in an array
     while ($row = $result->fetch_assoc()) {
         // Store both ID and full name in an array
-        $userIDs[] = [
-            'id' => $row['id'],
+        $userIDs[] = ['id' => $row['id'],
             'firstname' => $row['FirstName'],
             'lastname' => $row['LastName']
         ];
@@ -340,7 +339,7 @@ function clearTable(table) {
                     return '';
             }
         }
-        function addSchedule() {
+function addSchedule() {
     var formData = new FormData();
     formData.append('employee', document.getElementById('employee').value);
     formData.append('selectedDate', document.getElementById('selectedDate').value);
