@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // $user_id = $conn->real_escape_string($_POST['user_id']);
 
     // Create SQL query
-    $sql = "SELECT * FROM users join Person on PersonID = id WHERE username='$username' AND password='$password'";
+    $sql = "SELECT * FROM users as u join Person as p on p.users_id = u.id WHERE username='$username' AND password='$password'";
 
     // Execute query
     $result = $conn->query($sql);
@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['loggedin'] = true;
         $_SESSION['Name'] = $row['FirstName'] ." " . $row['LastName'];
         // Redirect to FAQ page upon successful login
-        header("Location: newIndex.php");
+        header("Location: index.php");
         exit();
     } else {
         // Display error message for invalid credentials
