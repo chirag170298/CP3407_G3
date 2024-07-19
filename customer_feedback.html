@@ -23,30 +23,6 @@
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        .form-group input, .form-group textarea, .form-group select {
-            width: calc(100% - 22px);
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        .form-group button {
-            padding: 10px 20px;
-            background: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .form-group button:hover {
-            background: #45a049;
-        }
         table {
             width: 100%;
             border-collapse: collapse;
@@ -62,52 +38,37 @@
         th {
             background-color: #f2f2f2;
         }
-        .status-open {
-            color: #f44336;
+        .response-btn, .quick-response-btn {
+            padding: 5px 10px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
         }
-        .status-in-progress {
-            color: #ff9800;
+        .response-btn:hover, .quick-response-btn:hover {
+            background: #45a049;
         }
-        .status-resolved {
-            color: #4CAF50;
+        .pending {
+            color: red;
+        }
+        .responded {
+            color: green;
         }
     </style>
 </head>
 <body>
     <h1>Customer Feedback Manager</h1>
     <div class="container">
-        <div class="form-group">
-            <label for="customerName">Customer Name:</label>
-            <input type="text" id="customerName">
-        </div>
-        <div class="form-group">
-            <label for="customerEmail">Customer Email:</label>
-            <input type="email" id="customerEmail">
-        </div>
-        <div class="form-group">
-            <label for="category">Category:</label>
-            <select id="category">
-                <option value="product">Product</option>
-                <option value="service">Service</option>
-                <option value="delivery">Delivery</option>
-                <option value="other">Other</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="description">Description:</label>
-            <textarea id="description" rows="4"></textarea>
-        </div>
-        <div class="form-group">
-            <button onclick="addFeedback()">Add Feedback</button>
-        </div>
         <table id="feedbackTable">
             <thead>
                 <tr>
                     <th>Customer Name</th>
-                    <th>Email</th>
-                    <th>Category</th>
-                    <th>Description</th>
+                    <th>Feedback Type</th>
+                    <th>Message</th>
                     <th>Status</th>
+                    <th>Response</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -117,32 +78,17 @@
         </table>
     </div>
     <script>
-        function addFeedback() {
-            const name = document.getElementById('customerName').value;
-            const email = document.getElementById('customerEmail').value;
-            const category = document.getElementById('category').value;
-            const description = document.getElementById('description').value;
-
-            fetch('http://localhost:3002/api/feedback', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name, email, category, description, status: 'open' })
-            })
-            .then(response => response.json())
-            .then(data => {
-                fetchFeedback();
-                clearForm();
-            })
-            .catch(error => console.error('Error adding feedback:', error));
-        }
-
-        function fetchFeedback() {
-            fetch('http://localhost:3002/api/feedback')
-                .then(response => response.json())
-                .then(data => {
-                    renderFeedbackTable(data);
-                })
-                .catch(error => console.error('Error fetching feedback:', error));
+        async function fetchFeedback() {
+            try {
+                const response = await fetch('http://localhost:3002/api/feedback');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+                renderFeedbackTable(data);
+            } catch (error) {
+                console.error('Error fetching feedback:', error);
+            }
         }
 
         function renderFeedbackTable(feedbacks) {
@@ -151,50 +97,46 @@
             feedbacks.forEach(feedback => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
-                    <td>${feedback.name}</td>
-                    <td>${feedback.email}</td>
-                    <td>${feedback.category}</td>
-                    <td>${feedback.description}</td>
-                    <td class="status-${feedback.status.replace(' ', '-').toLowerCase()}">${feedback.status}</td>
+                    <td>${feedback.customerName}</td>
+                    <td>${feedback.feedbackType}</td>
+                    <td>${feedback.message}</td>
+                    <td class="${feedback.status.toLowerCase()}">${feedback.status}</td>
+                    <td>${feedback.response || ''}</td>
                     <td>
-                        <button onclick="updateStatus(${feedback.id}, 'in-progress')">In Progress</button>
-                        <button onclick="updateStatus(${feedback.id}, 'resolved')">Resolve</button>
-                        <button onclick="deleteFeedback(${feedback.id})">Delete</button>
+                        <button class="response-btn" onclick="respondToFeedback(${feedback.id})">Respond</button>
+                        <button class="quick-response-btn" onclick="quickRespond(${feedback.id}, 'Thank you')">Thank you</button>
+                        <button class="quick-response-btn" onclick="quickRespond(${feedback.id}, 'Okay')">Okay</button>
                     </td>
                 `;
                 tableBody.appendChild(row);
             });
         }
 
-        function updateStatus(feedbackId, status) {
-            fetch(`http://localhost:3002/api/feedback/${feedbackId}`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ status })
-            })
-            .then(response => response.json())
-            .then(data => {
-                fetchFeedback();
-            })
-            .catch(error => console.error('Error updating feedback status:', error));
+        function respondToFeedback(feedbackId) {
+            const response = prompt('Enter your response:');
+            if (response) {
+                sendResponse(feedbackId, response);
+            }
         }
 
-        function deleteFeedback(feedbackId) {
-            fetch(`http://localhost:3002/api/feedback/${feedbackId}`, {
-                method: 'DELETE'
-            })
-            .then(response => response.json())
-            .then(data => {
-                fetchFeedback();
-            })
-            .catch(error => console.error('Error deleting feedback:', error));
+        function quickRespond(feedbackId, message) {
+            sendResponse(feedbackId, message);
         }
 
-        function clearForm() {
-            document.getElementById('customerName').value = '';
-            document.getElementById('customerEmail').value = '';
-            document.getElementById('category').value = 'product';
-            document.getElementById('description').value = '';
+        async function sendResponse(feedbackId, response) {
+            try {
+                const res = await fetch(`http://localhost:3002/api/feedback/${feedbackId}/response`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ response })
+                });
+                if (!res.ok) {
+                    throw new Error(`HTTP error! status: ${res.status}`);
+                }
+                fetchFeedback();
+            } catch (error) {
+                console.error('Error responding to feedback:', error);
+            }
         }
 
         // Initial fetch

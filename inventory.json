@@ -1,0 +1,96 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "name": "Apples",
+      "category": "Fruits",
+      "quantity": "100",
+      "price": 1.99,
+      "unit": "kg"
+    },
+    {
+      "id": 2,
+      "name": "Bananas",
+      "category": "Fruits",
+      "quantity": 80,
+      "price": 1.49,
+      "unit": "bunch"
+    },
+    {
+      "id": 3,
+      "name": "Milk",
+      "category": "Dairy",
+      "quantity": 50,
+      "price": 2.49,
+      "unit": "litre"
+    },
+    {
+      "id": 4,
+      "name": "Bread",
+      "category": "Bakery",
+      "quantity": 40,
+      "price": 3.99,
+      "unit": "loaf"
+    },
+    {
+      "id": 5,
+      "name": "Eggs",
+      "category": "Dairy",
+      "quantity": 60,
+      "price": 2.99,
+      "unit": "dozen"
+    },
+    {
+      "id": 6,
+      "name": "Rice",
+      "category": "Grains",
+      "quantity": 30,
+      "price": 1.79,
+      "unit": "kg"
+    },
+    {
+      "id": 7,
+      "name": "Pasta",
+      "category": "Grains",
+      "quantity": 25,
+      "price": 1.29,
+      "unit": "packet"
+    },
+    {
+      "id": 8,
+      "name": "Chicken",
+      "category": "Meat",
+      "quantity": 20,
+      "price": 5.99,
+      "unit": "kg"
+    },
+    {
+      "id": 9,
+      "name": "Salmon",
+      "category": "Seafood",
+      "quantity": 15,
+      "price": 9.99,
+      "unit": "kg"
+    },
+    {
+      "id": 10,
+      "name": "Chips",
+      "category": "Snacks",
+      "quantity": 50,
+      "price": 2.49,
+      "unit": "packet"
+    },
+    {
+      "id": 1721057314037,
+      "name": "Panadol",
+      "quantity": "19",
+      "price": "9.99"
+    },
+    {
+      "id": 1721127332304,
+      "name": "Snickers",
+      "quantity": "95",
+      "price": "3.02"
+    }
+  ]
+}
