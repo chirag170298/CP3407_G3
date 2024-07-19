@@ -216,7 +216,7 @@ include 'auth.php';
             <a href="#">Supermart Admin</a>
         </div>
         <div class="nav-links">
-            <a href="#dashboard">Dashboard</a>
+            <a href="employee_stats.php">Dashboard</a>
             <a href="#inventory">Inventory</a>
             <a href="#promotions">Promotions</a>
             <a href="#employees">Employees</a>
@@ -230,7 +230,8 @@ include 'auth.php';
             <p>Promotions</p>
         </div>
         <div class="service">
-            <img src="inventory.png" alt="Service 2">
+            <a href="inventoryManagement.php">
+            <img src="inventory.png" alt="Service 2"></a>
             <p>Inventory</p>
         </div>
         <div class="service">
@@ -242,21 +243,26 @@ include 'auth.php';
             <p>Management</p>
         </div>
         <div class="service">
-            <img src="campaign.png" alt="Service 5">
+            <a href="learning.php">
+            <img src="campaign.png" alt="Service 5"></a>
             <p>Learning</p>
         </div>
         <div class="service">
-            <img src="statistics.png" alt="Service 6">
+            <a href="employee_stats.php">
+            <img src="statistics.png" alt="Service 6"></a>
             <p>Sales Report</p>
         </div>
         <div class="service">
-            <img src="rate.png" alt="Service 7">
+            <a href="feedback.php">
+            <img src="rate.png" alt="Service 7"></a>
             <p>Customer Feedback</p>
         </div>
         <div class="service">
-            <img src="schedule.png" alt="Service 8">
+            <a href="store_schedule.php">
+            <img src="schedule.png" alt="Service 8"></a>
             <p>Store Schedule</p>
         </div>
+        
     </div>
 
     <div class="clock-section">
@@ -302,6 +308,7 @@ include 'auth.php';
             <button onclick="scheduleShift()">Schedule Shift</button>
             <button onclick="viewShifts()">View shifts -TEST BUTTON-</button>
             <button onclick="learningButton()">View learning -TEST BUTTON-</button>
+            <button onclick="performanceButton()">View Performance -TEST BUTTON-</button>
         </div>
     </div>
 
@@ -310,22 +317,6 @@ include 'auth.php';
     </div>
 
     <script>
-        // Function to fetch data from JSON file
-        // function fetchJSONData() {
-        //     console.log('Fetching JSON data...');
-        //     fetch('demo_data.json')
-        //         .then(response => {
-        //             if (!response.ok) {
-        //                 throw new Error('Network response was not ok');
-        //             }
-        //             return response.json();
-        //         })
-        //         .then(data => {
-        //             console.log('JSON data fetched successfully');
-        //             processData(data);
-        //         })
-        //         .catch(error => console.error('Error fetching data:', error));
-        // }
 
         function processData(data) {
             console.log('Processing JSON data...');
@@ -359,6 +350,10 @@ include 'auth.php';
             window.location.href = 'learning.php';
         }
         
+        function performanceButton() {
+            // Redirect to store_schedule.php
+            window.location.href = 'employee_stats.php';
+        }
 
         // Clock functions
         function updateClock() {
