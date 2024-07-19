@@ -1,7 +1,6 @@
-<!-- TODO
- 
-Rework this to grab the ENTIRE roster into a json, work with Chirags shit from there on out-->
-
+<?php
+include 'auth.php';
+?>
 
 
 
@@ -27,7 +26,8 @@ if ($result->num_rows > 0) {
     // Fetch all user IDs and store them in an array
     while ($row = $result->fetch_assoc()) {
         // Store both ID and full name in an array
-        $userIDs[] = ['id' => $row['id'],
+        $userIDs[] = [
+            'id' => $row['id'],
             'firstname' => $row['FirstName'],
             'lastname' => $row['LastName']
         ];
@@ -162,7 +162,7 @@ $conn->close();
 
 </head>
 <body>
-<a href="newIndex.php" class="home-button">Home</a>
+<a href="index.php" class="home-button">Home</a>
     <h1>Employee Schedule Manager</h1>
     <div class="container">
         <form>
@@ -196,7 +196,7 @@ $conn->close();
                 
             </div>
         <div class="form-group">
-        <button type="button" onclick="submitDate()">Refresh Roster</button>
+        <button type="button" onclick="fetchShifts()">Refresh Roster</button>
 </div>
         </form>
     </div>
@@ -270,7 +270,7 @@ $conn->close();
     <div id="rosterResults">ROSTER RESULTS</div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        function submitDate() {
+        function fetchShifts() {
             const selectedDate = $('#selectedDate').val();
             
             $.ajax({
@@ -339,7 +339,7 @@ function clearTable(table) {
                     return '';
             }
         }
-function addSchedule() {
+    function addSchedule() {
     var formData = new FormData();
     formData.append('employee', document.getElementById('employee').value);
     formData.append('selectedDate', document.getElementById('selectedDate').value);
@@ -359,7 +359,7 @@ function addSchedule() {
         if (data.trim() === 'Schedule added successfully') {
             console.log(data); // Log response from PHP script
             alert('Schedule added successfully!');
-            submitDate();
+            fetchShifts();
         } else {
             console.log(data); // Log response from PHP script
             alert('Error: ' + data); // Display PHP error message
@@ -425,7 +425,7 @@ function renderScheduleTable(data) {
                         if (tableRow.length > 0) {
                             tableRow.remove();
                             console.log('Entry deleted successfully');
-                            submitDate();
+                            fetchShifts();
                         } else {
                             console.error('Table row not found');
                         }
@@ -440,11 +440,6 @@ function renderScheduleTable(data) {
         }
         document.addEventListener('DOMContentLoaded', function() {
             console.log("DOM fully loaded and parsed.");
-            
-            // Define your function
-            
-            
-            // Call your function
-            submitDate();
+            fetchShifts();
         });
     </script>
