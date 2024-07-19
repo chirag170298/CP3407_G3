@@ -70,20 +70,26 @@
             margin-top: 20px;
         }
 
-        .video-section, .quiz-section, .image-section, .all-done-section {
+        .image-section, .video-section, .quiz-section, .all-done-section {
             margin-bottom: 40px;
+        }
+
+        .image-section img {
+            display: block;
+            max-width: 40%;
+            max-height: 40%;
+            margin: 20px auto;
+        }
+
+        .welcome-message {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
         }
 
         video {
             display: block;
             max-width: 100%;
-            margin: 20px auto;
-        }
-
-        img {
-            display: block;
-            max-width: 40%;
-            max-height: 40%;
             margin: 20px auto;
         }
 
@@ -258,6 +264,8 @@
     </header>
 
     <main class="container">
+        
+
         <section class="video-section">
             <video controls>
                 <source src="Untitled design.mp4" type="video/mp4">
@@ -278,9 +286,24 @@
             </div>
         </section>
 
-        <section class="image-section">
-            
-            <img src="_3ab95b53-40c9-4cf7-849b-1ef05a6fc73c.jpg" alt="Team Image">
+        <section class="video-section">
+            <video controls>
+                <source src="Untitled design.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </section>
+
+        <section class="quiz-section">
+            <div class="quiz-container" id="quiz2">
+                <div class="question" id="question2">Question text goes here...</div>
+                <ul class="options" id="options2"></ul>
+                <input type="text" id="fill-in-the-blank2" class="fill-in-the-blank" placeholder="Type your answer here">
+                <div class="matching-container" id="matching-container2"></div>
+                <button id="submit2">Submit Answer</button>
+            </div>
+            <div class="progress-container">
+                <div id="progress-bar2" class="progress-bar"></div>
+            </div>
         </section>
 
         <section class="video-section">
@@ -289,30 +312,32 @@
                 Your browser does not support the video tag.
             </video>
         </section>
-        
-        <section class="video-section">
-            <video controls>
-                <source src="Untitled design.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
+
+        <section class="quiz-section">
+            <div class="quiz-container" id="quiz3">
+                <div class="question" id="question3">Question text goes here...</div>
+                <ul class="options" id="options3"></ul>
+                <input type="text" id="fill-in-the-blank3" class="fill-in-the-blank" placeholder="Type your answer here">
+                <div class="matching-container" id="matching-container3"></div>
+                <button id="submit3">Submit Answer</button>
+            </div>
+            <div class="progress-container">
+                <div id="progress-bar3" class="progress-bar"></div>
+            </div>
         </section>
 
         <section class="all-done-section" id="all-done">
-            <h1>Congratulations, You're All Done!</h1>
-            <div id="summary"></div>
-            <p>Thank you for completing the training. Please review the resources below for further information and next steps.</p>
+            <h1>Congratulations!</h1>
+            <p id="summary">You have completed the quiz!</p>
             <div class="cta-buttons">
-                <a href="resources.html" class="btn">View Resources</a>
-                <a href="feedback.html" class="btn">Give Feedback</a>
-                <a href="exit.html" class="btn">Exit</a>
+                <a href="#more-training" class="btn">More Training</a>
+                <a href="#dashboard" class="btn">Go to Dashboard</a>
             </div>
         </section>
     </main>
 
     <footer>
-        <div class="container">
-            <p>&copy; 2024 ALLIN1 Australia. All rights reserved.</p>
-        </div>
+        <p>ALLIN1 Australia &copy; 2024</p>
     </footer>
 
     <script>
@@ -342,23 +367,95 @@
                     { item1: "Bakery", item2: "Jane Smith" }
                 ]
             },
+            {
+                type: "multiple-choice",
+                question: "Which day of the week is the busiest?",
+                options: ["Monday", "Wednesday", "Friday", "Saturday"],
+                answer: "Saturday"
+            },
+            {
+                type: "multiple-choice",
+                question: "How many types of bread do we sell in our bakery?",
+                options: ["5", "10", "15", "20"],
+                answer: "15"
+            },
+            {
+                type: "fill-in-the-blank",
+                question: "What is the name of our loyalty program?",
+                answer: "Super Saver"
+            },
+            {
+                type: "matching",
+                question: "Match the products with their respective aisles.",
+                pairs: [
+                    { item1: "Cereal", item2: "Aisle 2" },
+                    { item1: "Dairy", item2: "Aisle 4" }
+                ]
+            }
+        ];
+
+        const quizQuestions2 = [
+            {
+                type: "multiple-choice",
+                question: "Which vegetable is always kept in the refrigerated section?",
+                options: ["Tomatoes", "Lettuce", "Cucumbers", "Carrots"],
+                answer: "Lettuce"
+            },
+            {
+                type: "multiple-choice",
+                question: "Which section has gluten-free products?",
+                options: ["Aisle 3", "Aisle 6", "Aisle 8", "Aisle 10"],
+                answer: "Aisle 6"
+            },
+            {
+                type: "fill-in-the-blank",
+                question: "What is our store's closing time on Sundays?",
+                answer: "6 PM"
+            },
+            {
+                type: "matching",
+                question: "Match the staff members with their roles.",
+                pairs: [
+                    { item1: "Alice", item2: "Cashier" },
+                    { item1: "Bob", item2: "Stock Clerk" }
+                ]
+            }
+        ];
+
+        const quizQuestions3 = [
+            {
+                type: "multiple-choice",
+                question: "Which product has the highest discount during sales?",
+                options: ["Chocolates", "Soda", "Chips", "Ice Cream"],
+                answer: "Chocolates"
+            },
+            {
+                type: "multiple-choice",
+                question: "Which department handles customer inquiries?",
+                options: ["Customer Service", "Management", "Sales", "Security"],
+                answer: "Customer Service"
+            },
+            {
+                type: "fill-in-the-blank",
+                question: "How many check-out counters are in our store?",
+                answer: "10"
+            },
+            {
+                type: "matching",
+                question: "Match the items to their typical shelf life.",
+                pairs: [
+                    { item1: "Milk", item2: "7 days" },
+                    { item1: "Canned Beans", item2: "2 years" }
+                ]
+            }
         ];
 
         let currentQuestionIndex = 0;
         let correctAnswers = 0;
         let selectedPair = [];
 
-        const questionElement = document.getElementById('question');
-        const optionsElement = document.getElementById('options');
-        const fillInTheBlankElement = document.getElementById('fill-in-the-blank');
-        const matchingContainer = document.getElementById('matching-container');
-        const submitButton = document.getElementById('submit');
-        const progressBar = document.getElementById('progress-bar');
-        const allDoneSection = document.getElementById('all-done');
-        const summaryElement = document.getElementById('summary');
-
-        function showQuestion(questionIndex) {
-            const questionData = quizQuestions[questionIndex];
+        function showQuestion(questionIndex, quizContainer, questionElement, optionsElement, fillInTheBlankElement, matchingContainer) {
+            const questionData = quizContainer[questionIndex];
             questionElement.textContent = questionData.question;
 
             optionsElement.style.display = 'none';
@@ -371,7 +468,7 @@
                 questionData.options.forEach(option => {
                     const li = document.createElement('li');
                     li.textContent = option;
-                    li.onclick = selectOption;
+                    li.onclick = (event) => selectOption(event, questionData, questionElement);
                     optionsElement.appendChild(li);
                 });
             } else if (questionData.type === "fill-in-the-blank") {
@@ -393,30 +490,30 @@
             }
         }
 
-        function selectOption(event) {
+        function selectOption(event, questionData, questionElement) {
             const selectedOption = event.target.textContent;
-            const correctAnswer = quizQuestions[currentQuestionIndex].answer;
+            const correctAnswer = questionData.answer;
             if (selectedOption === correctAnswer) {
                 alert('Correct!');
                 correctAnswers++;
-                updateProgressBar();
+                updateProgressBar(questionElement.id.replace('question', 'progress-bar'));
             } else {
                 alert('Wrong answer');
             }
-            nextQuestion();
+            nextQuestion(questionElement.id.replace('question', ''));
         }
 
-        function submitFillInTheBlank() {
+        function submitFillInTheBlank(quizContainer, fillInTheBlankElement, questionElement) {
             const answer = fillInTheBlankElement.value.trim();
-            const correctAnswer = quizQuestions[currentQuestionIndex].answer;
+            const correctAnswer = quizContainer[currentQuestionIndex].answer;
             if (answer.toLowerCase() === correctAnswer.toLowerCase()) {
                 alert('Correct!');
                 correctAnswers++;
-                updateProgressBar();
+                updateProgressBar(questionElement.id.replace('question', 'progress-bar'));
             } else {
                 alert('Wrong answer');
             }
-            nextQuestion();
+            nextQuestion(questionElement.id.replace('question', ''));
         }
 
         function selectMatchingItem(event) {
@@ -431,46 +528,83 @@
                 if (isCorrectPair) {
                     alert('Correct pair!');
                     correctAnswers++;
-                    updateProgressBar();
+                    updateProgressBar('progress-bar');
                 } else {
                     alert('Wrong pair');
                 }
                 selectedPair = [];
-                nextQuestion();
+                nextQuestion('');
             }
         }
 
-        function updateProgressBar() {
+        function updateProgressBar(progressBarId) {
+            const progressBar = document.getElementById(progressBarId);
             const progress = ((currentQuestionIndex + 1) / quizQuestions.length) * 100;
             progressBar.style.width = progress + '%';
             progressBar.textContent = Math.round(progress) + '%';
         }
 
-        function nextQuestion() {
+        function nextQuestion(quizSuffix) {
             currentQuestionIndex++;
-            if (currentQuestionIndex < quizQuestions.length) {
-                showQuestion(currentQuestionIndex);
+            if (quizSuffix === '2') {
+                if (currentQuestionIndex < quizQuestions2.length) {
+                    showQuestion(currentQuestionIndex, quizQuestions2, document.getElementById('question2'), document.getElementById('options2'), document.getElementById('fill-in-the-blank2'), document.getElementById('matching-container2'));
+                } else {
+                    showAllDoneSection();
+                }
+            } else if (quizSuffix === '3') {
+                if (currentQuestionIndex < quizQuestions3.length) {
+                    showQuestion(currentQuestionIndex, quizQuestions3, document.getElementById('question3'), document.getElementById('options3'), document.getElementById('fill-in-the-blank3'), document.getElementById('matching-container3'));
+                } else {
+                    showAllDoneSection();
+                }
             } else {
-                showAllDoneSection();
+                if (currentQuestionIndex < quizQuestions.length) {
+                    showQuestion(currentQuestionIndex, quizQuestions, document.getElementById('question'), document.getElementById('options'), document.getElementById('fill-in-the-blank'), document.getElementById('matching-container'));
+                } else {
+                    showAllDoneSection();
+                }
             }
         }
 
         function showAllDoneSection() {
-            summaryElement.textContent = `You got ${correctAnswers} correct answers out of ${quizQuestions.length}.`;
-            allDoneSection.style.display = 'block';
+            document.getElementById('all-done').style.display = 'block';
+            document.getElementById('summary').textContent = `You answered ${correctAnswers} out of ${quizQuestions.length} questions correctly.`;
         }
 
-        submitButton.addEventListener('click', () => {
-            const questionData = quizQuestions[currentQuestionIndex];
-            if (questionData.type === "fill-in-the-blank") {
-                submitFillInTheBlank();
-            } else if (questionData.type === "matching" && selectedPair.length !== 2) {
-                alert('Please select two items to match');
+        document.getElementById('submit').addEventListener('click', () => {
+            const quizContainer = quizQuestions;
+            const fillInTheBlankElement = document.getElementById('fill-in-the-blank');
+            const questionElement = document.getElementById('question');
+            if (quizContainer[currentQuestionIndex].type === 'fill-in-the-blank') {
+                submitFillInTheBlank(quizContainer, fillInTheBlankElement, questionElement);
             }
         });
 
-        showQuestion(currentQuestionIndex);
+        document.getElementById('submit2').addEventListener('click', () => {
+            const quizContainer = quizQuestions2;
+            const fillInTheBlankElement = document.getElementById('fill-in-the-blank2');
+            const questionElement = document.getElementById('question2');
+            if (quizContainer[currentQuestionIndex].type === 'fill-in-the-blank') {
+                submitFillInTheBlank(quizContainer, fillInTheBlankElement, questionElement);
+            }
+        });
+
+        document.getElementById('submit3').addEventListener('click', () => {
+            const quizContainer = quizQuestions3;
+            const fillInTheBlankElement = document.getElementById('fill-in-the-blank3');
+            const questionElement = document.getElementById('question3');
+            if (quizContainer[currentQuestionIndex].type === 'fill-in-the-blank') {
+                submitFillInTheBlank(quizContainer, fillInTheBlankElement, questionElement);
+            }
+        });
+
+        showQuestion(currentQuestionIndex, quizQuestions, document.getElementById('question'), document.getElementById('options'), document.getElementById('fill-in-the-blank'), document.getElementById('matching-container'));
+        showQuestion(currentQuestionIndex, quizQuestions2, document.getElementById('question2'), document.getElementById('options2'), document.getElementById('fill-in-the-blank2'), document.getElementById('matching-container2'));
+        showQuestion(currentQuestionIndex, quizQuestions3, document.getElementById('question3'), document.getElementById('options3'), document.getElementById('fill-in-the-blank3'), document.getElementById('matching-container3'));
     </script>
 </body>
 </html>
+
+
 
