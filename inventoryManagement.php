@@ -44,108 +44,26 @@ $conn->close();
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link rel="stylesheet" href="mainstyles.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventory Manager</title>
     <title>Add new item</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 20px;
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-        .container {
-            max-width: 10000px;
-            margin: 0 auto;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        .form-group input,
-        .form-group select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        .form-group button {
-            padding: 10px 20px;
-            background: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .form-group button:hover {
-            background: #45a049;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        table, th, td {
-            border: 1px solid #ddd;
-        }
-        th, td {
-            padding: 12px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        .edit-btn, .delete-btn {
-            padding: 5px 10px;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .edit-btn {
-            background: #2196F3;
-        }
-        .edit-btn:hover {
-            background: #1976D2;
-        }
-        .delete-btn {
-            background: #f44336;
-        }
-        .delete-btn:hover {
-            background: #e53935;
-        }
-        .home-button {
-    position: fixed;
-    top: 10px; /* Adjust to position vertically */
-    left: 10px; /* Adjust to position horizontally */
-    background-color: #007bff; /* Example background color */
-    color: #fff; /* Text color */
-    padding: 10px 20px;
-    text-decoration: none; /* Remove underline */
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-}
-
-.home-button:hover {
-    background-color: #0056b3; /* Darker color on hover */
-}
-    </style>
+    
 </head>
 <body>
-<a href="index.php" class="home-button">Home</a>
+<div class="navbar">
+<div class="logo">
+            <a href="index.php">Supermart Admin</a>
+        </div>
+        <div class="nav-links">
+            <a href="employee_stats.php">Dashboard</a>
+            <a href="inventoryManagement.php">Inventory</a>
+            <a href="promotions.php">Promotions</a>
+            <a href="#">Employees</a>
+        </div>
+        <button class="logout-btn" onclick=Logout()>Logout</button>
+    </div>
     <h1>Inventory Manager</h1>
     <h1>Add new Item</h1>
     <div class="container">
@@ -285,7 +203,7 @@ $conn->close();
                     // <td>${price}</td>
                     // <td><button class="delete-btn" onclick="deleteEntry('${stockID}')">Delete</button></td>
                 // Append row to table body
-    function addNewItem() {
+                function addNewItem() {
         var formData = new FormData();
         formData.append('itemname', document.getElementById('itemname').value);
         formData.append('itemquantity', document.getElementById('itemquantity').value);
@@ -355,3 +273,7 @@ $conn->close();
     </script>
 </body>
 </html>
+
+
+
+
