@@ -1,128 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link rel="stylesheet" href="mainstyles.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Promotions Management</title>
-    <style>
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-        }
-
-        .container {
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            max-width: 100%;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        h1, h2 {
-            text-align: center;
-        }
-
-        .tabs {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-
-        .tab {
-            padding: 10px 20px;
-            background-color: #f2f2f2;
-            cursor: pointer;
-            margin-right: 10px;
-            border-radius: 4px 4px 0 0;
-        }
-
-        .tab.active {
-            background-color: #e2e2e2;
-        }
-
-        .tab-content {
-            display: none;
-            flex-grow: 1;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        .form-section, .promotion-list-section {
-            margin-bottom: 20px;
-        }
-
-        .form-section label, .form-section input, .form-section textarea, .form-section button, .form-section select {
-            display: block;
-            width: 100%;
-            margin-bottom: 10px;
-        }
-
-        .form-section input, .form-section textarea, .form-section select {
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-
-        .form-section button {
-            padding: 10px;
-            background-color: #28a745;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .form-section button:hover {
-            background-color: #218838;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        table, th, td {
-            border: 1px solid #ddd;
-        }
-
-        th, td {
-            padding: 8px;
-            text-align: center;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-
-        .delete-button {
-            background-color: #dc3545;
-            color: #fff;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .delete-button:hover {
-            background-color: #c82333;
-        }
-
-        .promo-image {
-            width: 100px;
-            height: 100px;
-            object-fit: cover;
-        }
-    </style>
+    <title>Promotions Management - TESTING</title>
 </head>
 <body>
+<div class="navbar">
+<div class="logo">
+            <a href="index.php">Supermart Admin</a>
+        </div>
+        <div class="nav-links">
+            <a href="employee_stats.php">Dashboard</a>
+            <a href="inventoryManagement.php">Inventory</a>
+            <a href="promotions.php">Promotions</a>
+            <a href="#">Employees</a>
+        </div>
+    </div>
     <div class="container">
         <h1>Promotions Management</h1>
         <div class="tabs">
@@ -130,6 +25,7 @@
             <div class="tab" data-tab="create">Create Promotion</div>
             <div class="tab" data-tab="delete">Delete Promotion</div>
         </div>
+        
 
         <div id="current" class="tab-content active">
             <div class="promotion-list-section">
