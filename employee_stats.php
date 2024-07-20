@@ -8,93 +8,29 @@ include 'auth.php';
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link rel="stylesheet" href="mainstyles.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee Performance Stats</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f4f4f4;
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-        
-        main {
-            margin: 20px;
-        }
-        
-        .chart-container {
-            background: white;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        
-        .table-container {
-            background: white;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            font-size: 1em;
-        }
-        
-        table, th, td {
-            border: 1px solid #ddd;
-        }
-        
-        th, td {
-            padding: 12px;
-            text-align: left;
-        }
-        
-        th {
-            background-color: #f2f2f2;
-        }
-        
-        tbody tr:hover {
-            background-color: #f1f1f1;
-        }
-        
-        .top-employee {
-            background: #e0ffe0;
-            border: 1px solid #4CAF50;
-            padding: 10px;
-            margin-bottom: 20px;
-            border-radius: 8px;
-        }
-        
-        .training-completed {
-            color: green;
-        }
-        
-        .training-pending {
-            color: red;
-        }
-    </style>
     
 </head>
 <body>
+<div class="navbar">
+<div class="logo">
+            <a href="index.php">Supermart Admin</a>
+        </div>
+        <div class="nav-links">
+            <a href="employee_stats.php">Dashboard</a>
+            <a href="inventoryManagement.php">Inventory</a>
+            <a href="promotions.php">Promotions</a>
+            <a href="#">Employees</a>
+        </div>
+        <button class="logout-btn" onclick=Logout()>Logout</button>
+    </div>
     <h1>Employee Performance Statistics</h1>
     
     <main>
-    <nav>
-            <ul>
-                <li><a href="index.php">Home</a></li>
-                <li><a href="roster.php">Roster</a></li>
-                <li><a href="logout.php">logout</a></li>
-            </ul>
-        </nav>
+    
         <section class="top-employee" id="topEmployeeSection">
             <h2>Top Employee</h2>
             <p id="topEmployee"></p>
