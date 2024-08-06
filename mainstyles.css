@@ -200,6 +200,7 @@
             text-align: center;
             color: #333;
         }
+
         .container {
             max-width: 10000px;
             margin: 0 auto;
@@ -208,13 +209,16 @@
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
+
         .form-group {
             margin-bottom: 15px;
         }
+
         .form-group label {
             display: block;
             margin-bottom: 5px;
         }
+
         .form-group input,
         .form-group select {
             width: 100%;
@@ -222,6 +226,7 @@
             border: 1px solid #ddd;
             border-radius: 4px;
         }
+
         .form-group button {
             padding: 10px 20px;
             background: #4CAF50;
@@ -230,13 +235,350 @@
             border-radius: 4px;
             cursor: pointer;
         }
+
         .form-group button:hover {
             background: #45a049;
         }
+
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #ddd;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .edit-btn,
+        .delete-btn {
+            padding: 5px 10px;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .edit-btn {
+            background: #2196F3;
+        }
+
+        .edit-btn:hover {
+            background: #1976D2;
+        }
+
+        .delete-btn {
+            background: #f44336;
+        }
+
+        .delete-btn:hover {
+            background: #e53935;
+        }
+
+        .home-button {
+            position: fixed;
+            top: 10px;
+            /* Adjust to position vertically */
+            left: 10px;
+            /* Adjust to position horizontally */
+            background-color: #007bff;
+            /* Example background color */
+            color: #fff;
+            /* Text color */
+            padding: 10px 20px;
+            text-decoration: none;
+            /* Remove underline */
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .home-button:hover {
+            background-color: #0056b3;
+            /* Darker color on hover */
+        }
+
+        .info-sections {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .best-employee,
+        .discount-offers {
+            width: 48%;
+            padding: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+
+        .best-employee h2,
+        .discount-offers h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .employee-content {
+            display: flex;
+            align-items: center;
+        }
+
+        .employee-image {
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            margin-right: 20px;
+        }
+
+        .employee-details {
+            max-width: 70%;
+        }
+
+        .offers-content {
+            padding: 10px;
+        }
+
+        .offer {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+
+        .offer h3 {
+            margin: 0;
+            color: #007BFF;
+        }
+
+        main {
+            margin: 20px;
+        }
+
+        .chart-container {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .table-container {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 1em;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #ddd;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .top-employee {
+            background: #e0ffe0;
+            border: 1px solid #4CAF50;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+
+        .training-completed {
+            color: green;
+        }
+
+        .training-pending {
+            color: red;
+        }
+
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            padding: 10px 20px;
+            background-color: #f2f2f2;
+            cursor: pointer;
+            margin-right: 10px;
+            border-radius: 4px 4px 0 0;
+        }
+
+        .tab.active {
+            background-color: #e2e2e2;
+        }
+
+        .tab-content {
+            display: none;
+            flex-grow: 1;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .form-section,
+        .promotion-list-section {
+            margin-bottom: 20px;
+        }
+
+        .form-section label,
+        .form-section input,
+        .form-section textarea,
+        .form-section button,
+        .form-section select {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .form-section input,
+        .form-section textarea,
+        .form-section select {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .form-section button {
+            padding: 10px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .form-section button:hover {
+            background-color: #218838;
+        }
+
+        .filter-section {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+
+        .filter-section label {
+            margin-right: 10px;
+        }
+
+        .report-section {
+            flex-grow: 1;
+            margin-top: 20px;
+        }
+
+
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: #ffffff;
+            color: #000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+        }
+
+        .navbar .logo a {
+            color: #D52B1E;
+            text-decoration: none;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .navbar .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .navbar .nav-links a {
+            color: #000;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        .navbar .nav-links a:hover {
+            color: #D52B1E;
+        }
+
+        .navbar .logout-btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #D52B1E;
+            color: #fff;
+            transition: background-color 0.3s ease;
+
+        }
+
+        .navbar .logout-btn:hover {
+            background-color: #b2241b;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .container {
+            max-width: 10000px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
         }
         table, th, td {
             border: 1px solid #ddd;
@@ -248,154 +590,75 @@
         th {
             background-color: #f2f2f2;
         }
-        .edit-btn, .delete-btn {
+        .response-btn, .quick-response-btn {
             padding: 5px 10px;
+            background: #4CAF50;
             color: white;
             border: none;
             border-radius: 4px;
             cursor: pointer;
+            margin: 5px;
         }
-        .edit-btn {
-            background: #2196F3;
+        .response-btn:hover, .quick-response-btn:hover {
+            background: #45a049;
         }
-        .edit-btn:hover {
-            background: #1976D2;
+        .pending {
+            color: red;
         }
-        .delete-btn {
-            background: #f44336;
+        .responded {
+            color: green;
         }
-        .delete-btn:hover {
-            background: #e53935;
+
+        .info-sections {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
         }
-        .home-button {
-    position: fixed;
-    top: 10px; /* Adjust to position vertically */
-    left: 10px; /* Adjust to position horizontally */
-    background-color: #007bff; /* Example background color */
-    color: #fff; /* Text color */
-    padding: 10px 20px;
-    text-decoration: none; /* Remove underline */
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-}
 
-.home-button:hover {
-    background-color: #0056b3; /* Darker color on hover */
-}
+        .best-employee,
+        .discount-offers {
+            width: 48%;
+            padding: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
 
-main {
-    margin: 20px;
-}
+        .best-employee h2,
+        .discount-offers h2 {
+            text-align: center;
+            color: #333;
+        }
 
-.chart-container {
-    background: white;
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+        .employee-content {
+            display: flex;
+            align-items: center;
+        }
 
-.table-container {
-    background: white;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+        .employee-image {
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            margin-right: 20px;
+        }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-    font-size: 1em;
-}
+        .employee-details {
+            max-width: 70%;
+        }
 
-table, th, td {
-    border: 1px solid #ddd;
-}
+        .offers-content {
+            padding: 10px;
+        }
 
-th, td {
-    padding: 12px;
-    text-align: left;
-}
+        .offer {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff;
+        }
 
-th {
-    background-color: #f2f2f2;
-}
-
-tbody tr:hover {
-    background-color: #f1f1f1;
-}
-
-.top-employee {
-    background: #e0ffe0;
-    border: 1px solid #4CAF50;
-    padding: 10px;
-    margin-bottom: 20px;
-    border-radius: 8px;
-}
-
-.training-completed {
-    color: green;
-}
-
-.training-pending {
-    color: red;
-}
-
-
-.tabs {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-}
-
-.tab {
-    padding: 10px 20px;
-    background-color: #f2f2f2;
-    cursor: pointer;
-    margin-right: 10px;
-    border-radius: 4px 4px 0 0;
-}
-
-.tab.active {
-    background-color: #e2e2e2;
-}
-
-.tab-content {
-    display: none;
-    flex-grow: 1;
-}
-
-.tab-content.active {
-    display: block;
-}
-
-.form-section, .promotion-list-section {
-    margin-bottom: 20px;
-}
-
-.form-section label, .form-section input, .form-section textarea, .form-section button, .form-section select {
-    display: block;
-    width: 100%;
-    margin-bottom: 10px;
-}
-
-.form-section input, .form-section textarea, .form-section select {
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-
-.form-section button {
-    padding: 10px;
-    background-color: #28a745;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.form-section button:hover {
-    background-color: #218838;
-}
+        .offer h3 {
+            margin: 0;
+            color: #007BFF;
+        }
