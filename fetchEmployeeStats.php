@@ -1,18 +1,4 @@
 <?php 
-$servername = 'cp3407-website-db.cfumcuommiak.ap-southeast-2.rds.amazonaws.com'; // Replace with your RDS endpoint
-$username = 'CP3407admin';
-$password = 'YFtG]?$4&+k}.WJ';
-$dbname = 'EasyGrocer';
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-
 
 $sql = "SELECT p.PersonID, p.FirstName, p.LastName, p.StoreID, p.RoleID, p.users_id,
                    COALESCE(pr.FEEDBACK, 0) AS FEEDBACK,
@@ -42,9 +28,23 @@ $sql = "SELECT p.PersonID, p.FirstName, p.LastName, p.StoreID, p.RoleID, p.users
 
 
 
-$result = $conn->query($sql);
-$employeeStats = array();
 
+$servername = 'cp3407-website-db.cfumcuommiak.ap-southeast-2.rds.amazonaws.com'; 
+$username = 'CP3407admin';
+$password = 'YFtG]?$4&+k}.WJ';
+$dbname = 'EasyGrocer';
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$result = $conn->query($sql);
+
+$employeeStats = array();
 
 if ($result->num_rows > 0) {
     // Output data of each row
@@ -54,8 +54,6 @@ if ($result->num_rows > 0) {
 } else {
     $employeeStats = ['error' => 'No results found'];
 }
-
-
 header('Content-Type: application/json');
 echo json_encode($employeeStats);
 $conn->close();
