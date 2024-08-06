@@ -25,7 +25,8 @@ if (isset($_POST['date'])) {
 
 
 // SQL query to fetch roster data for the specified week starting from weekStartDate
-$sql = "SELECT RosterID, Date, ShiftID, users_id, PersonID, FirstName, LastName from Roster join Person on PersonID = users_id WHERE Date >= '$weekStartDate' AND Date <= DATE_ADD('$weekStartDate', INTERVAL 6 DAY)";
+$sql = "SELECT RosterID, Date, ShiftID, Roster.users_id, PersonID, FirstName, LastName from Roster join Person on PersonID = Roster.users_id WHERE Date >= '$weekStartDate' AND Date <= DATE_ADD('$weekStartDate', INTERVAL 6 DAY) 
+ORDER BY Date ASC, ShiftID ASC";
 
 $servername = 'cp3407-website-db.cfumcuommiak.ap-southeast-2.rds.amazonaws.com'; // Replace with your RDS endpoint
 $username = 'CP3407admin';
