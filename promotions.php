@@ -8,15 +8,16 @@
 </head>
 <body>
 <div class="navbar">
-<div class="logo">
+        <div class="logo">
             <a href="index.php">Supermart Admin</a>
         </div>
         <div class="nav-links">
-            <a href="employee_stats.php">Dashboard</a>
+            <a href="index.php">Dashboard</a>
             <a href="inventoryManagement.php">Inventory</a>
             <a href="promotions.php">Promotions</a>
-            <a href="#">Employees</a>
+            <a href="employees.php">Employees</a>
         </div>
+        <button class="logout-btn" onclick=Logout()>Logout</button>
     </div>
     <div class="container">
         <h1>Promotions Management</h1>
