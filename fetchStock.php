@@ -18,7 +18,7 @@ if ($conn->connect_error) {
 }
 
 
-$sql = "SELECT * FROM STOCK";
+$sql = "SELECT * FROM STOCK ORDER BY ITEM_NAME ASC";
 
 $result = $conn->query($sql);
 
