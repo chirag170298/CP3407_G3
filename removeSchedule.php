@@ -1,17 +1,19 @@
 <?php
 
-$servername = 'cp3407-website-db.cfumcuommiak.ap-southeast-2.rds.amazonaws.com'; // Replace with your RDS endpoint
-    $username = 'CP3407admin';
-    $password = 'YFtG]?$4&+k}.WJ';
-    $dbname = 'EasyGrocer';
+$servername = 'cp3407-website-db.cfumcuommiak.ap-southeast-2.rds.amazonaws.com'; 
+$username = 'CP3407admin';
+$password = 'YFtG]?$4&+k}.WJ';
+$dbname = 'EasyGrocer';
 
-    $mysqli = new mysqli($servername, $username, $password, $dbname);
+    // Create connection
+$mysqli = new mysqli($servername, $username, $password, $dbname);
 header('Content-Type: application/json');
 $response = array('success' => false);
 
 if (isset($_POST['RosterID'])) {
     $rosterID = intval($_POST['RosterID']);
 
+  // Check connection
   if ($mysqli->connect_errno) {
       $response['message'] = 'Failed to connect to MySQL: ' . $mysqli->connect_error;
   } else {
