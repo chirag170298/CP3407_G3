@@ -17,6 +17,16 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+if (intval($quantity) < 0) {
+    echo "Quantity less than 0";
+    exit();
+}
+
+if (intval($price) <= 0){
+    echo "Price less than 0";
+    exit();
+    
+}
 
 $sql_check = "SELECT COUNT(*) as count FROM STOCK WHERE ITEM_NAME = ?";
 $stmt_check = $conn->prepare($sql_check);
